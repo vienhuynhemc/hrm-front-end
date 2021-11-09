@@ -13,7 +13,7 @@
   .header {
     display: flex;
     .fillter {
-      height: 34px;
+      height: 44px;
       background-color: white;
       box-shadow: 4px 8px 28px 0 #d3dceb;
       border-radius: 12px;
@@ -56,13 +56,13 @@
 
       .search {
         margin-right: 20px;
-        margin-left: 20px;
+        margin-left: 10px;
         display: flex;
         border-radius: 50px;
         border: 1px solid #eef0f5;
         height: 25px;
         align-items: center;
-        width: 200px;
+        width: 441px;
 
         i {
           margin-left: 10px;
@@ -85,7 +85,7 @@
       align-items: center;
       margin-left: auto;
       margin-right: auto;
-      height: 34px;
+      height: 44px;
       p {
         margin: 0;
         font-family: "Raleway";
@@ -120,12 +120,12 @@
     }
     .list {
       margin-top: 10px;
-      height: 675px;
+      height: 665px;
       overflow: hidden;
 
       .content-list {
-        height: 692px;
-        width: 820px;
+        height: 682px;
+        width: 803px;
         scroll-behavior: smooth;
         overflow: scroll;
 
@@ -196,4 +196,19 @@
       }
     }
   }
+}
+::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background: #00000000;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: #00000066;
+}
+::-webkit-scrollbar {
+  width: 7px;
+  border-radius: 10px;
+}
+::-webkit-scrollbar:hover {
+  background: #0700001c !important;
 }

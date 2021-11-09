@@ -40,7 +40,7 @@
                     <p>{{item.lastName}}</p>
                     <p>{{item.gender}}</p>
                     <p>{{item.doB!.format()}}</p>
-                    <p>{{item.email}}</p>
+                    <p [innerHTML]="getEmail(item.email!)"></p>
                     <p>{{item.address}}</p>
                     <p>{{item.city}}</p>
                     <p>{{item.department!.id}}</p>

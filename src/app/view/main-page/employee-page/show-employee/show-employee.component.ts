@@ -63,6 +63,12 @@ export class ShowEmployeeComponent implements OnInit {
     }
   }
 
+  public getEmail(email: string) {
+    // things to do
+    // add <br>
+    return email;
+  }
+
   public removeItem(id: number) {
     this.employeePageService.deleteEmployeeById(id).subscribe(data => {
       console.log(data);
