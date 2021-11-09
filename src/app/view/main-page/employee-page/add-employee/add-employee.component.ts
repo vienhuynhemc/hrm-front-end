@@ -1,3 +1,4 @@
+import { NotificationService } from './../../../../service/notification/notification.service';
 import { EmployeePageService } from './../../../../service/main-page/employee-page/employee-page.service';
 import { Component, Input, OnInit } from '@angular/core';
 
@@ -20,6 +21,7 @@ export class AddEmployeeComponent implements OnInit {
 
   constructor(
     public employeePageService: EmployeePageService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -50,12 +52,20 @@ export class AddEmployeeComponent implements OnInit {
       };
       this.employeePageService.addNewEmployee(body).subscribe(data => {
         console.log(data);
-        this.firstName = "";
-        this.lastName = "";
-        this.email = "";
-        this.address = "";
-        this.city = "";
-        this.employeePageService.loadData(0);
+        this.employeePageService.isShowNotification = true;
+        if (data.status == "500 INTERNAL_SERVER_ERROR") {
+          this.notificationService.titlePopUpNotificationEmployee = "Failure";
+          this.notificationService.childPopUpNotificationEmployee = `Already exists staff with email: ${this.email}`;
+        } else {
+          this.notificationService.titlePopUpNotificationEmployee = "Success";
+          this.notificationService.childPopUpNotificationEmployee = `You have successfully added the employee #${data.data.id}`;
+          this.firstName = "";
+          this.lastName = "";
+          this.email = "";
+          this.address = "";
+          this.city = "";
+          this.employeePageService.loadData(0);
+        }
       });
     }
   }

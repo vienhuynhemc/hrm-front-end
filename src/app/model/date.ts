@@ -4,6 +4,8 @@ export class Date{
     year:number | undefined;
 
     public format():string{
-        return `${this.day}/${this.month}/${this.year}`;
+        let day = this.day!<10?"0"+this.day:this.day;
+        let month = this.month!<10?"0"+this.month:this.month;
+        return `${day}/${month}/${this.year}`;
     }
 }

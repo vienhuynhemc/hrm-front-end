@@ -25,6 +25,7 @@
             <p>Id</p>
             <p>Name</p>
             <p>Location</p>
+            <p>Number of employees</p>
         </div>
         <div class="list">
             <div id="content-list" class="content-list" (scroll)="onScroll($event)">
@@ -32,8 +33,11 @@
                     <p>{{item.id}}</p>
                     <p>{{item.name}}</p>
                     <p>{{item.location}}</p>
-                    <i (click)="removeItem(item.id!)" class="far fa-trash-alt" matTooltip="Delete"
-                        matTooltipClass="tooltip"></i>
+                    <p>{{item.member}}</p>
+                    <i *ngIf="item.member == 0" (click)="requestRemoveItem(item.id!)" class="far fa-trash-alt"
+                        matTooltip="Delete" matTooltipClass="tooltip"></i>
+                    <i *ngIf="item.member != 0" class="far fa-trash-alt can-not-remove" matTooltip="
+                    Can't delete because have employees" matTooltipClass="tooltip"></i>
                     <i (click)="editItem(item)" class="fas fa-pencil-alt" matTooltip="Edit"
                         matTooltipClass="tooltip"></i>
                 </div>
@@ -42,5 +46,36 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="formYesNo" *ngIf="departmentPageService.isShowPopupRequest">
+    <div class="formYesNoHidden"></div>
+    <div class="content">
+        <p class="title"><i class="fa fa-cogs"></i> HCR </p>
+        <div class="select">
+            <p class="title1">{{notificationService.titlePopUpYesNoDepartment}}</p>
+            <p class="title2">{{notificationService.childPopUpYesNoDepartment}}</p>
+            <div>
+                <p *ngIf="departmentPageService.isProcessRemove" (click)="removeItem()">Yes , sure<i
+                        class="fa fa-check"></i></p>
+                <p *ngIf="!departmentPageService.isProcessRemove" (click)="departmentPageService.saveItem()">Yes ,
+                    sure<i class="fa fa-check"></i></p>
+                <span (click)="hiddenPopup()">No, think more <i class="fas fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="notification" *ngIf="departmentPageService.isShowNotification">
+    <div class="content">
+        <main lottie [options]="notificationService.options"
+            (animationCreated)="notificationService.animationCreated($event)" class="anim"></main>
+        <p class="title">{{notificationService.titlePopUpNotificationDepartment}}</p>
+        <p class="child">{{notificationService.childPopUpNotificationDepartment}}</p>
+        <button class="confirm" (click)="hiddenNotification()">
+            <i class="fab fa-battle-net"></i>
+            <p>Oke</p>
+        </button>
     </div>
 </div>

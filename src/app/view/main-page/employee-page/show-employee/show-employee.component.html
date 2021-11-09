@@ -44,7 +44,7 @@
                     <p>{{item.address}}</p>
                     <p>{{item.city}}</p>
                     <p>{{item.department!.id}}</p>
-                    <i (click)="removeItem(item.id!)" class="far fa-trash-alt" matTooltip="Delete"
+                    <i (click)="requestRemoveItem(item.id!)" class="far fa-trash-alt" matTooltip="Delete"
                         matTooltipClass="tooltip"></i>
                     <i (click)="editItem(item)" class="fas fa-pencil-alt" matTooltip="Edit"
                         matTooltipClass="tooltip"></i>
@@ -54,5 +54,36 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="formYesNo" *ngIf="employeePageService.isShowPopupRequest">
+    <div class="formYesNoHidden"></div>
+    <div class="content">
+        <p class="title"><i class="fa fa-cogs"></i> HCR </p>
+        <div class="select">
+            <p class="title1">{{notificationService.titlePopUpYesNoEmployee}}</p>
+            <p class="title2">{{notificationService.childPopUpYesNoEmployee}}</p>
+            <div>
+                <p *ngIf="employeePageService.isProcessRemove" (click)="removeItem()">Yes , sure<i
+                        class="fa fa-check"></i></p>
+                <p *ngIf="!employeePageService.isProcessRemove" (click)="employeePageService.saveItem()">Yes , sure<i
+                        class="fa fa-check"></i></p>
+                <span (click)="hiddenPopup()">No, think more <i class="fas fa-times"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="notification" *ngIf="employeePageService.isShowNotification">
+    <div class="content">
+        <main lottie [options]="notificationService.options"
+            (animationCreated)="notificationService.animationCreated($event)" class="anim"></main>
+        <p class="title">{{notificationService.titlePopUpNotificationEmployee}}</p>
+        <p class="child">{{notificationService.childPopUpNotificationEmployee}}</p>
+        <button class="confirm" (click)="hiddenNotification()">
+            <i class="fab fa-battle-net"></i>
+            <p>Oke</p>
+        </button>
     </div>
 </div>

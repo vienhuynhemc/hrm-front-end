@@ -1,3 +1,4 @@
+import { NotificationService } from './../../../../service/notification/notification.service';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { DepartmentPageService } from 'src/app/service/main-page/department-page/department-page.service';
 // lottie
@@ -18,6 +19,7 @@ export class ShowDepartmentComponent implements OnInit {
 
   constructor(
     public departmentPageService: DepartmentPageService,
+    public notificationService: NotificationService,
   ) { }
 
   ngOnInit(): void {
@@ -41,18 +43,11 @@ export class ShowDepartmentComponent implements OnInit {
   animationCreated(animationItem: AnimationItem): void {
   }
 
-  public removeItem(id: number) {
-    this.departmentPageService.deleteDepartmentById(id).subscribe(data => {
-      console.log(data);
-    });
-    this.departmentPageService.loadData(0);
-  }
-
-  public editItem(item:Department){
-      this.departmentPageService.showEditDepartment();
-      this.departmentPageService.editName = item.name!;
-      this.departmentPageService.editLocation = item.location!;
-      this.departmentPageService.editId = item.id!;
+  public editItem(item: Department) {
+    this.departmentPageService.showEditDepartment();
+    this.departmentPageService.editName = item.name!;
+    this.departmentPageService.editLocation = item.location!;
+    this.departmentPageService.editId = item.id!;
   }
 
   @HostListener('scroll', ['$event']) // for scroll events of the current element
@@ -72,6 +67,37 @@ export class ShowDepartmentComponent implements OnInit {
         )
       }
     }
+  }
+
+  public requestRemoveItem(id: number): void {
+    this.departmentPageService.idDepartmentNeedRemove = id;
+    this.notificationService.titlePopUpYesNoDepartment = "Delete department";
+    this.notificationService.childPopUpYesNoDepartment = `Are you sure you want to delete department
+    #${this.departmentPageService.idDepartmentNeedRemove}`
+    this.departmentPageService.isShowPopupRequest = true;
+    this.departmentPageService.isProcessRemove = true;
+  }
+
+  public hiddenPopup(): void {
+    this.departmentPageService.isShowPopupRequest = false;
+    this.departmentPageService.isProcessRemove = false;
+  }
+
+  public removeItem() {
+    this.departmentPageService.deleteDepartmentById(this.departmentPageService.idDepartmentNeedRemove).subscribe(data => {
+      console.log(data);
+      this.departmentPageService.loadData(0);
+      this.departmentPageService.isShowPopupRequest = false;
+      this.departmentPageService.isProcessRemove = false;
+      this.departmentPageService.isShowNotification = true;
+      this.notificationService.titlePopUpNotificationDepartment = "Success";
+      this.notificationService.childPopUpNotificationDepartment = `You have successfully deleted the department #${this.departmentPageService.idDepartmentNeedRemove}`;
+    });
+    this.departmentPageService.loadData(0);
+  }
+
+  public hiddenNotification(): void {
+    this.departmentPageService.isShowNotification = false;
   }
 
 }

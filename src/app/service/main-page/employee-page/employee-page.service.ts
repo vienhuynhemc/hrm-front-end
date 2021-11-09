@@ -1,3 +1,4 @@
+import { NotificationService } from './../../notification/notification.service';
 import { Department } from './../../../model/department';
 import { HttpClient } from '@angular/common/http';
 import { Employee } from './../../../model/employee';
@@ -41,8 +42,14 @@ export class EmployeePageService {
   public editCity = "";
   public editDepartmentId: number = 0;
 
+  public idEmployeeNeedRemove: number = 0;
+  public isShowPopupRequest: boolean = false;
+  public isShowNotification: boolean = false;
+  public isProcessRemove: boolean = false;
+
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private notificationService: NotificationService
   ) { }
 
   public getStringMainAttribute(): string {
@@ -124,6 +131,30 @@ export class EmployeePageService {
     sort: string) {
     const url = `${environment.REST_API}employee/part?min=${min}&max=${max}&sort=${sort}&search=${search}&mainAttribute=${mainAttribute}`;
     return this.httpClient.get<any>(url);
+  }
+
+  public saveItem() {
+    if (this.editFirstName.trim().length != 0
+      && this.editLastName.trim().length != 0
+      && this.editEmail.trim().length != 0
+      && this.editAddress.trim().length != 0
+      && this.editCity.trim().length != 0
+    ) {
+      this.saveEmployee().subscribe(data => {
+        console.log(data);
+        this.isShowPopupRequest = false;
+        this.isShowNotification = true;
+        if (data.message == "Exists email") {
+          this.notificationService.titlePopUpNotificationEmployee = "Failure";
+          this.notificationService.childPopUpNotificationEmployee = `Already exists staff with email: ${this.editEmail}`;
+        } else {
+          this.notificationService.titlePopUpNotificationEmployee = "Success";
+          this.notificationService.childPopUpNotificationEmployee = `You have successfully updated the employee #${this.editId}`;
+          this.hiddenEditEmployee();
+          this.loadData(0);
+        }
+      })
+    }
   }
 
   public getAllIdDepartment() {

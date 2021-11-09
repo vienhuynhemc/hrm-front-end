@@ -1,3 +1,4 @@
+import { NotificationService } from './../../notification/notification.service';
 import { environment } from './../../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -30,8 +31,14 @@ export class DepartmentPageService {
   public editLocation: string = "";
   public editId: number = 0;
 
+  public idDepartmentNeedRemove: number = 0;
+  public isShowPopupRequest: boolean = false;
+  public isShowNotification: boolean = false;
+  public isProcessRemove: boolean = false;
+
   constructor(
     private httpClient: HttpClient,
+    private notificationService: NotificationService
   ) { }
 
   public loadData(event: number) {
@@ -51,13 +58,20 @@ export class DepartmentPageService {
     this.isLoadData = true;
     document.getElementById("content-list")!.scrollTop = 99999999;
     setTimeout(() => {
-      this.getListDepartmentFromAPI(min, max, search, mainAttribute, sort,).subscribe(data => {
+      this.getListDepartmentFromAPI(min, max, search, mainAttribute, sort,).subscribe(async data => {
         if (event == 1) {
           this.departments = [];
         }
         for (let i = 0; i < data.data.length; i++) {
           let department = new Department();
           department.id = data.data[i].id;
+          await this.getEmployeeByIdDepartment(department.id!).subscribe(dataGetEmployee => {
+            if (dataGetEmployee.message == 'Not Found Departmant') {
+              department.member = 0;
+            } else {
+              department.member = dataGetEmployee.data.length;
+            }
+          });
           department.location = data.data[i].location;
           department.name = data.data[i].name;
           this.departments.push(department);
@@ -78,6 +92,25 @@ export class DepartmentPageService {
     sort: string) {
     const url = `${environment.REST_API}department/part?min=${min}&max=${max}&sort=${sort}&search=${search}&mainAttribute=${mainAttribute}`;
     return this.httpClient.get<any>(url);
+  }
+
+  public getEmployeeByIdDepartment(id: number) {
+    const url = `${environment.REST_API}employee/department/${id}`;
+    return this.httpClient.get<any>(url);
+  }
+
+  public saveItem() {
+    if (this.editName.trim().length > 0) {
+      this.saveDepartment().subscribe(data => {
+        console.log(data);
+        this.hiddenEditDepartment();
+        this.loadData(0);
+        this.isShowPopupRequest = false;
+        this.isShowNotification = true;
+        this.notificationService.titlePopUpNotificationDepartment = "Success";
+        this.notificationService.childPopUpNotificationDepartment = `You have successfully updated the department #${this.editId}`;
+      })
+    }
   }
 
   public addNewDepartment(body: object) {

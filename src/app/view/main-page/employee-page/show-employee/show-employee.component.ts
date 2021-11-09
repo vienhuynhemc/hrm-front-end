@@ -1,3 +1,4 @@
+import { NotificationService } from './../../../../service/notification/notification.service';
 import { Date } from 'src/app/model/date';
 import { EmployeePageService } from './../../../../service/main-page/employee-page/employee-page.service';
 import { Component, HostListener, OnInit } from '@angular/core';
@@ -18,7 +19,8 @@ export class ShowEmployeeComponent implements OnInit {
   };
 
   constructor(
-    public employeePageService: EmployeePageService
+    public employeePageService: EmployeePageService,
+    public notificationService: NotificationService,
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +41,10 @@ export class ShowEmployeeComponent implements OnInit {
   public changeSort(sort: string) {
     this.employeePageService.changeSort(sort);
     this.employeePageService.loadData(0);
+  }
+
+  public hiddenNotification(): void {
+    this.employeePageService.isShowNotification = false;
   }
 
   animationCreated(animationItem: AnimationItem): void {
@@ -64,16 +70,49 @@ export class ShowEmployeeComponent implements OnInit {
   }
 
   public getEmail(email: string) {
-    // things to do
-    // add <br>
-    return email;
+    let result = "";
+    let length = email.length;
+    if (length > 10) {
+      for (let i = 0; i < length / 10; i++) {
+        result += email.substring(i * 10, i * 10 + 10);
+        if (i < length / 10 - 1) {
+          result += "<br>"
+        }
+      }
+      if (length % 10 != 0) {
+        result += "<br>"
+        result += email.substring(result.length, result.length + length % 10)
+      }
+    } else {
+      result = email;
+    }
+    return result;
   }
 
-  public removeItem(id: number) {
-    this.employeePageService.deleteEmployeeById(id).subscribe(data => {
+  public requestRemoveItem(id: number): void {
+    this.employeePageService.idEmployeeNeedRemove = id;
+    this.notificationService.titlePopUpYesNoEmployee = "Delete employee";
+    this.notificationService.childPopUpYesNoEmployee = `Are you sure you want to delete employee
+    #${this.employeePageService.idEmployeeNeedRemove}`
+    this.employeePageService.isShowPopupRequest = true;
+    this.employeePageService.isProcessRemove = true;
+  }
+
+  public hiddenPopup(): void {
+    this.employeePageService.isShowPopupRequest = false;
+    this.employeePageService.isProcessRemove = false;
+  }
+
+  public removeItem(): void {
+    this.employeePageService.deleteEmployeeById(this.employeePageService.idEmployeeNeedRemove).subscribe(data => {
       console.log(data);
+      this.employeePageService.loadData(0);
+      this.employeePageService.isShowPopupRequest = false;
+      this.employeePageService.isProcessRemove = false;
+      this.employeePageService.isShowNotification = true;
+      this.notificationService.titlePopUpNotificationEmployee = "Success";
+      this.notificationService.childPopUpNotificationEmployee = `You have successfully deleted the employee #${this.employeePageService.idEmployeeNeedRemove}`;
     });
-    this.employeePageService.loadData(0);
   }
 
   public editItem(item: Employee) {

@@ -1,3 +1,4 @@
+import { NotificationService } from './../../../../service/notification/notification.service';
 import { EmployeePageService } from './../../../../service/main-page/employee-page/employee-page.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -11,7 +12,8 @@ export class EditEmployeeComponent implements OnInit {
   public ids: string[] = [];
 
   constructor(
-    public employeePageService: EmployeePageService
+    public employeePageService: EmployeePageService,
+    public notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -22,19 +24,11 @@ export class EditEmployeeComponent implements OnInit {
     })
   }
 
-  public saveEmployee(): void {
-    if (this.employeePageService.editFirstName.trim().length != 0
-      && this.employeePageService.editLastName.trim().length != 0
-      && this.employeePageService.editEmail.trim().length != 0
-      && this.employeePageService.editAddress.trim().length != 0
-      && this.employeePageService.editCity.trim().length != 0
-    ) {
-      this.employeePageService.saveEmployee().subscribe(data => {
-        console.log(data);
-        this.employeePageService.hiddenEditEmployee();
-        this.employeePageService.loadData(0);
-      })
-    }
+  public requestSaveEmployee() {
+    this.notificationService.titlePopUpYesNoEmployee = "Update employee";
+    this.notificationService.childPopUpYesNoEmployee = `Are you sure you want to update employee
+    #${this.employeePageService.editId}`
+    this.employeePageService.isShowPopupRequest = true;
   }
 
   public back(): void {
