@@ -1,0 +1,46 @@
+<div class="show-department">
+    <div class="header">
+        <div class="fillter">
+            <select [(ngModel)]="departmentPageService.mainAttribute">
+                <option *ngFor="let item of departmentPageService.getMainAttributes()" [value]="item">{{item}}</option>
+            </select>
+            <div class="sort" [style.marginTop]="departmentPageService.getSortString() == 'ASC'?'-5px':'0px'">
+                <i *ngIf=" departmentPageService.getSortString()=='ASC'" class=" fas fa-sort-amount-down asc"
+                    (click)="changeSort('DESC')" matTooltip="Sort by DESC" matTooltipClass="tooltip"></i>
+                <i *ngIf="departmentPageService.getSortString() == 'DESC'" class="fas fa-sort-amount-down-alt desc"
+                    (click)="changeSort('ASC')" matTooltip="Sort by ASC" matTooltipClass="tooltip"></i>
+            </div>
+            <div class="search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search..." [(ngModel)]="departmentPageService.inputSearch"
+                    (ngModelChange)="changeSearch($event)">
+            </div>
+        </div>
+        <div class="show-found">
+            <p>Show {{departmentPageService.departments.length}} lines</p>
+        </div>
+    </div>
+    <div class="content">
+        <div class="header">
+            <p>Id</p>
+            <p>Name</p>
+            <p>Location</p>
+        </div>
+        <div class="list">
+            <div id="content-list" class="content-list" (scroll)="onScroll($event)">
+                <div class="line" *ngFor="let item of departmentPageService.departments">
+                    <p>{{item.id}}</p>
+                    <p>{{item.name}}</p>
+                    <p>{{item.location}}</p>
+                    <i (click)="removeItem(item.id!)" class="far fa-trash-alt" matTooltip="Delete"
+                        matTooltipClass="tooltip"></i>
+                    <i (click)="editItem(item)" class="fas fa-pencil-alt" matTooltip="Edit"
+                        matTooltipClass="tooltip"></i>
+                </div>
+                <div class="content-anim" *ngIf="departmentPageService.isLoadData">
+                    <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

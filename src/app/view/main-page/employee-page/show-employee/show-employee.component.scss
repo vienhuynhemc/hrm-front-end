@@ -1,0 +1,253 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.show-employee {
+  width: 803px;
+  position: absolute;
+  height: 760px;
+  top: 20px;
+  left: 321px;
+
+  .header {
+    display: flex;
+    .fillter {
+      height: 34px;
+      background-color: white;
+      box-shadow: 4px 8px 28px 0 #d3dceb;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+
+      select {
+        border: none;
+        outline: none;
+        margin-left: 20px;
+        font-weight: bold;
+        font-size: 13px;
+        font-family: "Raleway";
+        padding-right: 16px;
+      }
+
+      .sort {
+        overflow: hidden;
+        width: 20px;
+        height: 14px;
+        display: flex;
+        margin-left: 70px;
+        cursor: pointer;
+
+        i {
+          color: #9795b4;
+          font-size: 28px;
+          margin-left: -12px;
+          transform: scaleY(0.5);
+        }
+
+        .asc {
+          margin-top: -1px;
+        }
+
+        .desc {
+          margin-top: -9px;
+        }
+      }
+
+      .search {
+        margin-right: 20px;
+        margin-left: 20px;
+        display: flex;
+        border-radius: 50px;
+        border: 1px solid #eef0f5;
+        height: 25px;
+        align-items: center;
+        width: 200px;
+
+        i {
+          margin-left: 10px;
+          color: #9795b4;
+        }
+
+        input {
+          outline: none;
+          border: none;
+          margin-left: 10px;
+          width: 144px;
+          font-family: "Raleway";
+          margin-right: 12px;
+        }
+      }
+    }
+
+    .show-found {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+      height: 34px;
+      p {
+        margin: 0;
+        font-family: "Raleway";
+        font-size: 14px;
+        font-weight: 500;
+        color: #b8b8c8;
+      }
+    }
+  }
+
+  .content {
+    margin-top: 20px;
+    .header {
+      p {
+        color: #78909c;
+        font-family: sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      :nth-child(1) {
+        margin: 0;
+        margin-left: 10px;
+      }
+      :nth-child(2) {
+        margin: 0;
+        margin-left: 15px;
+      }
+      :nth-child(3) {
+        margin: 0;
+        margin-left: 25px;
+      }
+      :nth-child(4) {
+        margin: 0;
+        margin-left: 15px;
+      }
+      :nth-child(5) {
+        margin: 0;
+        margin-left: 15px;
+      }
+      :nth-child(6) {
+        margin: 0;
+        margin-left: 55px;
+      }
+      :nth-child(7) {
+        margin: 0;
+        margin-left: 50px;
+      }
+      :nth-child(8) {
+        margin: 0;
+        margin-left: 50px;
+      }
+      :nth-child(9) {
+        margin: 0;
+        margin-left: 73px;
+      }
+    }
+    .list {
+      margin-top: 10px;
+      height: 675px;
+      overflow: hidden;
+
+      .content-list {
+        height: 692px;
+        width: 820px;
+        scroll-behavior: smooth;
+        overflow: scroll;
+
+        .content-anim {
+          margin-top: 5px;
+          margin-left: 1px;
+          margin-right: 9px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .anim {
+            width: 100px;
+          }
+        }
+
+        .line {
+          background-color: white;
+          border-radius: 5px;
+          margin-top: 5px;
+          display: flex;
+          align-items: center;
+          padding: 5px;
+          position: relative;
+          margin-left: 1px;
+          margin-right: 9px;
+
+          p {
+            margin: 0px;
+            color: #5e6467;
+            font-family: "Raleway";
+            font-size: 13px;
+            font-weight: 500;
+          }
+
+          :nth-child(1) {
+            margin-left: 5px;
+            width: 20px;
+          }
+
+          :nth-child(2) {
+            margin-left: 5px;
+            width: 92px;
+          }
+
+          :nth-child(3) {
+            margin-left: 6px;
+            width: 67px;
+          }
+
+          :nth-child(4) {
+            margin-left: 17px;
+            width: 56px;
+          }
+
+          :nth-child(5) {
+            margin-left: 5px;
+            width: 82px;
+          }
+
+          :nth-child(6) {
+            margin-left: 3px;
+            width: 82px;
+          }
+
+          :nth-child(7) {
+            margin-left: 5px;
+            width: 99px;
+          }
+
+          :nth-child(8) {
+            margin-left: 9px;
+            width: 95px;
+          }
+
+          :nth-child(9) {
+            margin-left: 5px;
+            width: 20px;
+          }
+
+          :nth-child(10) {
+            margin-left: 35px;
+          }
+
+          :nth-child(11) {
+            margin-left: 20px;
+          }
+
+          i {
+            color: #9795b4;
+            cursor: pointer;
+            width: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<div class="add-department">
+    <div class="title">
+        <p>Add Department</p>
+    </div>
+    <div class="line">
+    </div>
+
+    <div class="input-data">
+        <i class="fas fa-signature"></i>
+        <input type="text" placeholder="Department name" [(ngModel)]="name">
+    </div>
+
+    <div class="input-data">
+        <i class="fas fa-map-marker-alt"></i>
+        <select [(ngModel)]="location">
+            <option *ngFor="let item of departmentPageService.locations" [value]="item">{{item}}</option>
+        </select>
+    </div>
+
+    <div class="add" (click)="addDepartment()">
+        <p>Add</p>
+    </div>
+</div>
