@@ -35,7 +35,7 @@ export class EmployeePageService {
   public editLastName: string = "";
   public editGender: string = "";
   public editId: number = 0;
-  public editDoB: Date | undefined;
+  public editDoB: string | undefined;
   public editEmail: string = "";
   public editAddress: string = "";
   public editCity = "";
@@ -135,6 +135,23 @@ export class EmployeePageService {
     const url = `${environment.REST_API}employee/${id}`;
     return this.httpClient.delete<any>(url);
   }
+
+  public saveEmployee() {
+    const url = `${environment.REST_API}employee/${this.editId}`;
+    console.log(url);
+    let body = {
+      address: this.editAddress,
+      city: this.editCity,
+      doB: this.editDoB!.slice(0, 10),
+      email: this.editEmail,
+      firstName: this.editFirstName,
+      lastName: this.editLastName,
+      gender: this.editGender,
+      department: this.editDepartmentId,
+    }
+    return this.httpClient.put<any>(url, body);
+  }
+
 
 
   public isShowEditEmployee(): boolean {

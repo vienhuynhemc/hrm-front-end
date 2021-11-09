@@ -1,3 +1,74 @@
 <div *ngIf="employeePageService.isShowEditEmployee()" class="edit-employee">
+    <div class="body">
 
+        <div class="title">
+            <p>Edit Employee #{{employeePageService.editId}}</p>
+        </div>
+        <div class="line">
+        </div>
+
+        <div class="wrap">
+            <div class="input-data">
+                <i class="fas fa-signature"></i>
+                <input type="text" placeholder="First name" [(ngModel)]="employeePageService.editFirstName">
+            </div>
+
+            <div class="input-data">
+                <i class="fas fa-signature"></i>
+                <input type="text" placeholder="Last name" [(ngModel)]="employeePageService.editLastName">
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div class="input-data">
+                <i class="far fa-envelope"></i>
+                <input type="text" placeholder="Email" [(ngModel)]="employeePageService.editEmail">
+            </div>
+
+            <div class="input-data">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" placeholder="Address" [(ngModel)]="employeePageService.editAddress">
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div class="input-data">
+                <i class="fas fa-city"></i>
+                <input type="text" placeholder="City" [(ngModel)]="employeePageService.editCity">
+            </div>
+
+            <div class="input-data">
+                <i class="fas fa-transgender-alt"></i>
+                <select [(ngModel)]="employeePageService.editGender">
+                    <option *ngFor="let item of employeePageService.gender" [value]="item">{{item}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="wrap">
+            <div class="input-data">
+                <i class="fas fa-birthday-cake"></i>
+                <input type="datetime-local" [ngModel]="employeePageService.editDoB | date:'yyyy-MM-ddTHH:mm'"
+                    (ngModelChange)="employeePageService.editDoB = $event" />
+            </div>
+
+            <div class="input-data">
+                <i class="far fa-id-card"></i>
+                <select [(ngModel)]="employeePageService.editDepartmentId" style="padding-right: 115px;">
+                    <option *ngFor="let item of ids" [value]="item">{{item}}</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="wrap">
+            <div class="add" (click)="saveEmployee()">
+                <p>Save</p>
+            </div>
+
+            <div class="back" (click)="back()">
+                <p>Back</p>
+            </div>
+        </div>
+    </div>
 </div>

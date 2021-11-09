@@ -6,15 +6,14 @@
             </select>
             <div class="sort" [style.marginTop]="employeePageService.getSortString() == 'ASC'?'-5px':'0px'">
                 <i *ngIf=" employeePageService.getSortString()=='ASC'" class=" fas fa-sort-amount-down asc"
-                    (click)="changeSort('DESC')" matTooltip="Sort by DESC"
-                    matTooltipClass="tooltip"></i>
+                    (click)="changeSort('DESC')" matTooltip="Sort by DESC" matTooltipClass="tooltip"></i>
                 <i *ngIf="employeePageService.getSortString() == 'DESC'" class="fas fa-sort-amount-down-alt desc"
-                    (click)="changeSort('ASC')" matTooltip="Sort by ASC"
-                    matTooltipClass="tooltip"></i>
+                    (click)="changeSort('ASC')" matTooltip="Sort by ASC" matTooltipClass="tooltip"></i>
             </div>
             <div class="search">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search..." [(ngModel)]="employeePageService.inputSearch" (ngModelChange)="changeSearch($event)" >
+                <input type="text" placeholder="Search..." [(ngModel)]="employeePageService.inputSearch"
+                    (ngModelChange)="changeSearch($event)">
             </div>
         </div>
         <div class="show-found">
@@ -45,10 +44,10 @@
                     <p>{{item.address}}</p>
                     <p>{{item.city}}</p>
                     <p>{{item.department!.id}}</p>
-                    <i  (click)="removeItem(item.id!)" class="far fa-trash-alt" matTooltip="Delete"
-                    matTooltipClass="tooltip"></i>
+                    <i (click)="removeItem(item.id!)" class="far fa-trash-alt" matTooltip="Delete"
+                        matTooltipClass="tooltip"></i>
                     <i (click)="editItem(item)" class="fas fa-pencil-alt" matTooltip="Edit"
-                    matTooltipClass="tooltip"></i>
+                        matTooltipClass="tooltip"></i>
                 </div>
                 <div class="content-anim" *ngIf="employeePageService.isLoadData">
                     <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>

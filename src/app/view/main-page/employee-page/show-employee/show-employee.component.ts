@@ -32,7 +32,7 @@ export class ShowEmployeeComponent implements OnInit {
     this.employeePageService.loadData(1);
   }
 
-  public onChangeSelect(event:any){
+  public onChangeSelect(event: any) {
     this.employeePageService.loadData(0);
   }
 
@@ -43,7 +43,6 @@ export class ShowEmployeeComponent implements OnInit {
 
   animationCreated(animationItem: AnimationItem): void {
   }
-
 
   @HostListener('scroll', ['$event']) // for scroll events of the current element
   onScroll(event: Event) {
@@ -81,10 +80,9 @@ export class ShowEmployeeComponent implements OnInit {
     this.employeePageService.editId = item.id!;
     this.employeePageService.editDepartmentId = item.department?.id!;
     this.employeePageService.editCity = item.city!;
-    let date = new Date();
-    date.year = item.doB?.year;
-    date.month = item.doB?.month;
-    date.day = item.doB?.day;
+    let month = item.doB?.month! < 10 ? "0" + item.doB?.month : item.doB?.month;
+    let day = item.doB?.day! < 10 ? "0" + item.doB?.day : item.doB?.day;
+    let date = `${item.doB?.year}-${month}-${day}T00:00`;
     this.employeePageService.editDoB = date;
   }
 

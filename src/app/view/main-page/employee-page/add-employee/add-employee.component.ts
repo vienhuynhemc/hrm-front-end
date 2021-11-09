@@ -1,5 +1,5 @@
 import { EmployeePageService } from './../../../../service/main-page/employee-page/employee-page.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add-employee',
@@ -14,7 +14,7 @@ export class AddEmployeeComponent implements OnInit {
   public address: string = "";
   public city: string = "";
   public email: string = "";
-  public date: Date = new Date();
+  public date: string = new Date().toISOString().slice(0, 16);
   public id: string = "";
   public ids: string[] = [];
 
@@ -38,11 +38,10 @@ export class AddEmployeeComponent implements OnInit {
       && this.address.trim().length != 0
       && this.city.trim().length != 0
     ) {
-      let dob = `${this.date.getFullYear()}-${this.date.getMonth()+1}-${this.date.getDate()}`;
       let body = {
         address: this.address,
         city: this.city,
-        doB: dob,
+        doB: this.date.slice(0, 10),
         email: this.email,
         firstName: this.firstName,
         lastName: this.lastName,
