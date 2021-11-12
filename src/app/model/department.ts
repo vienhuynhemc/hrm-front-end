@@ -1,6 +1,6 @@
-export class Department {
-    id: number | undefined;
-    name: string | undefined;
-    location: string | undefined;
-    member: number | undefined;
+export interface Department {
+    id: number;
+    name: string;
+    location: string;
+    member: number;
 }

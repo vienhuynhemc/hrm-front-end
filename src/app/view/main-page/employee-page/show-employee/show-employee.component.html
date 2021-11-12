@@ -1,19 +1,19 @@
 <div class="show-employee">
     <div class="header">
         <div class="fillter">
-            <select [(ngModel)]="employeePageService.mainAttribute" (ngModelChange)="onChangeSelect($event)">
-                <option *ngFor="let item of employeePageService.getMainAttributes()" [value]="item">{{item}}</option>
+            <select [(ngModel)]="employeePageService.mainAttribute" (ngModelChange)="onChangeSelect()">
+                <option *ngFor="let item of employeePageService.mainAttributes" [value]="item">{{item}}</option>
             </select>
-            <div class="sort" [style.marginTop]="employeePageService.getSortString() == 'ASC'?'-5px':'0px'">
-                <i *ngIf=" employeePageService.getSortString()=='ASC'" class=" fas fa-sort-amount-down asc"
+            <div class="sort" [style.marginTop]="employeePageService.sortString == 'ASC'?'-5px':'0px'">
+                <i *ngIf=" employeePageService.sortString=='ASC'" class=" fas fa-sort-amount-down asc"
                     (click)="changeSort('DESC')" matTooltip="Sort by DESC" matTooltipClass="tooltip"></i>
-                <i *ngIf="employeePageService.getSortString() == 'DESC'" class="fas fa-sort-amount-down-alt desc"
+                <i *ngIf="employeePageService.sortString == 'DESC'" class="fas fa-sort-amount-down-alt desc"
                     (click)="changeSort('ASC')" matTooltip="Sort by ASC" matTooltipClass="tooltip"></i>
             </div>
             <div class="search">
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="Search..." [(ngModel)]="employeePageService.inputSearch"
-                    (ngModelChange)="changeSearch($event)">
+                    (ngModelChange)="changeSearch()">
             </div>
             <div class="show-found">
                 <p>Show {{employeePageService.employees.length}} lines</p>
@@ -33,14 +33,14 @@
             <p>Department Id</p>
         </div>
         <div class="list">
-            <div id="content-list-e" class="content-list" (scroll)="onScroll($event)">
+            <div id="content-list-e" class="content-list" (scroll)="onScroll()">
                 <div class="line" *ngFor="let item of employeePageService.employees">
                     <p>{{item.id}}</p>
                     <p>{{item.firstName}}</p>
                     <p>{{item.lastName}}</p>
                     <p>{{item.gender}}</p>
-                    <p>{{item.doB!.format()}}</p>
-                    <p [innerHTML]="getEmail(item.email!)"></p>
+                    <p>{{item.doB!.format}}</p>
+                    <p>{{item.email}}</p>
                     <p>{{item.address}}</p>
                     <p>{{item.city}}</p>
                     <p>{{item.department!.id}}</p>
@@ -50,7 +50,7 @@
                         matTooltipClass="tooltip"></i>
                 </div>
                 <div class="content-anim" *ngIf="employeePageService.isLoadData">
-                    <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
+                    <main lottie [options]="options" class="anim"></main>
                 </div>
             </div>
         </div>
@@ -77,8 +77,7 @@
 
 <div class="notification" *ngIf="employeePageService.isShowNotification">
     <div class="content">
-        <main lottie [options]="notificationService.options"
-            (animationCreated)="notificationService.animationCreated($event)" class="anim"></main>
+        <main lottie [options]="notificationService.options" class="anim"></main>
         <p class="title">{{notificationService.titlePopUpNotificationEmployee}}</p>
         <p class="child">{{notificationService.childPopUpNotificationEmployee}}</p>
         <button class="confirm" (click)="hiddenNotification()">

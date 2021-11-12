@@ -18,7 +18,7 @@ export class EditDepartmentComponent implements OnInit {
   }
 
   public back(): void {
-    this.departmentPageService.hiddenEditDepartment();
+    this.departmentPageService.isEditDepartment = false;
   }
 
   public requestSaveDepartment() {

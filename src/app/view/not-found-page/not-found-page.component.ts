@@ -1,7 +1,5 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 // lottie
-import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
@@ -17,14 +15,9 @@ export class NotFoundPageComponent implements OnInit {
     path: '/assets/json/lottie/404-not-found.json',
   };
 
-  constructor(
-    private router: Router,
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-
-  animationCreated(animationItem: AnimationItem): void {
   }
 
 }

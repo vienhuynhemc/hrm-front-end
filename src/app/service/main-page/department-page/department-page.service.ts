@@ -9,11 +9,11 @@ import { Department } from 'src/app/model/department';
 })
 export class DepartmentPageService {
 
-  private isEditDepartment: boolean = false;
+  public isEditDepartment: boolean = false;
   public inputSearch: string = "";
-  private sortString: string = "ASC"
+  public sortString: string = "ASC"
   public mainAttribute: string = "Name"
-  private mainAttributes: string[] = [
+  public mainAttributes: string[] = [
     "Name",
   ];
 
@@ -49,7 +49,7 @@ export class DepartmentPageService {
       25,
       this.inputSearch,
       this.mainAttribute == "Name" ? "name" : "location",
-      this.getSortString() == "ASC" ? "asc" : "desc",
+      this.sortString == "ASC" ? "asc" : "desc",
       event
     );
   }
@@ -63,18 +63,19 @@ export class DepartmentPageService {
           this.departments = [];
         }
         for (let i = 0; i < data.data.length; i++) {
-          let department = new Department();
-          department.id = data.data[i].id;
-          await this.getEmployeeByIdDepartment(department.id!).subscribe(dataGetEmployee => {
-            if (dataGetEmployee.message == 'Not Found Departmant') {
-              department.member = 0;
-            } else {
-              department.member = dataGetEmployee.data.length;
+          await this.getEmployeeByIdDepartment(data.data[i].id).subscribe(dataGetEmployee => {
+            let member = 0;
+            if (dataGetEmployee.message != 'Not Found Departmant') {
+              member = dataGetEmployee.data.length;
             }
+            let department: Department = {
+              id: data.data[i].id,
+              location: data.data[i].location,
+              member: member,
+              name: data.data[i].name,
+            }
+            this.departments.push(department);
           });
-          department.location = data.data[i].location;
-          department.name = data.data[i].name;
-          this.departments.push(department);
         }
         if (data.data.length < max || data.data.length == 0) {
           this.isOutOfData = true;
@@ -103,7 +104,7 @@ export class DepartmentPageService {
     if (this.editName.trim().length > 0) {
       this.saveDepartment().subscribe(data => {
         console.log(data);
-        this.hiddenEditDepartment();
+        this.isEditDepartment = false;
         this.loadData(0);
         this.isShowPopupRequest = false;
         this.isShowNotification = true;
@@ -133,28 +134,4 @@ export class DepartmentPageService {
     return this.httpClient.delete<any>(url);
   }
 
-  public isShowEditDepartment(): boolean {
-    return this.isEditDepartment;
-  }
-
-  public showEditDepartment(): void {
-    this.isEditDepartment = true;
-  }
-
-  public hiddenEditDepartment(): void {
-    this.isEditDepartment = false;
-  }
-
-
-  public getMainAttributes(): string[] {
-    return this.mainAttributes;
-  }
-
-  public getSortString(): string {
-    return this.sortString;
-  }
-
-  public changeSort(newSort: string): void {
-    this.sortString = newSort;
-  }
 }

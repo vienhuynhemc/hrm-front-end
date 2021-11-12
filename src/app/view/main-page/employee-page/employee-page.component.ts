@@ -1,4 +1,3 @@
-import { MainPageService } from 'src/app/service/main-page/main-page.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,15 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeePageComponent implements OnInit {
 
-  constructor(
-    private mainPageService: MainPageService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.mainPageService.resetSelect();
-      this.mainPageService.selectEmployeePage();
-    }, 0);
   }
 
 }

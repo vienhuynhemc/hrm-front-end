@@ -32,7 +32,7 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   public back(): void {
-    this.employeePageService.hiddenEditEmployee();
+    this.employeePageService.isEditEmployee = false;
   }
 
 }

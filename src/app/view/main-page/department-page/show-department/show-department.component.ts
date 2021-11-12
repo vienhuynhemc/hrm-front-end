@@ -2,7 +2,6 @@ import { NotificationService } from './../../../../service/notification/notifica
 import { Component, HostListener, OnInit } from '@angular/core';
 import { DepartmentPageService } from 'src/app/service/main-page/department-page/department-page.service';
 // lottie
-import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import { Department } from 'src/app/model/department';
 
@@ -36,15 +35,12 @@ export class ShowDepartmentComponent implements OnInit {
   }
 
   public changeSort(sort: string) {
-    this.departmentPageService.changeSort(sort);
+    this.departmentPageService.sortString = sort;
     this.departmentPageService.loadData(0);
   }
 
-  animationCreated(animationItem: AnimationItem): void {
-  }
-
   public editItem(item: Department) {
-    this.departmentPageService.showEditDepartment();
+    this.departmentPageService.isEditDepartment = true;
     this.departmentPageService.editName = item.name!;
     this.departmentPageService.editLocation = item.location!;
     this.departmentPageService.editId = item.id!;
@@ -62,7 +58,7 @@ export class ShowDepartmentComponent implements OnInit {
           5,
           this.departmentPageService.inputSearch,
           this.departmentPageService.mainAttribute == "Name" ? "name" : "location",
-          this.departmentPageService.getSortString() == "ASC" ? "asc" : "desc",
+          this.departmentPageService.sortString == "ASC" ? "asc" : "desc",
           0
         )
       }

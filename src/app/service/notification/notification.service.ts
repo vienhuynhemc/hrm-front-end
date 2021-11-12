@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 
 @Injectable({
@@ -22,8 +21,4 @@ export class NotificationService {
   public childPopUpNotificationEmployee: string = "";
 
   constructor() { }
-
-  public animationCreated(animationItem: AnimationItem): void {
-  }
-
 }

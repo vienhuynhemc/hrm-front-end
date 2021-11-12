@@ -1,11 +1,8 @@
-import { NotificationService } from './../../../../service/notification/notification.service';
-import { Date } from 'src/app/model/date';
-import { EmployeePageService } from './../../../../service/main-page/employee-page/employee-page.service';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Employee } from 'src/app/model/employee';
-// lottie
-import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
+import { Employee } from 'src/app/model/employee';
+import { EmployeePageService } from './../../../../service/main-page/employee-page/employee-page.service';
+import { NotificationService } from './../../../../service/notification/notification.service';
 
 @Component({
   selector: 'app-show-employee',
@@ -30,16 +27,16 @@ export class ShowEmployeeComponent implements OnInit {
     this.employeePageService.loadData(0);
   }
 
-  public changeSearch(value: string) {
+  public changeSearch() {
     this.employeePageService.loadData(1);
   }
 
-  public onChangeSelect(event: any) {
+  public onChangeSelect() {
     this.employeePageService.loadData(0);
   }
 
   public changeSort(sort: string) {
-    this.employeePageService.changeSort(sort);
+    this.employeePageService.sortString = sort;
     this.employeePageService.loadData(0);
   }
 
@@ -47,11 +44,8 @@ export class ShowEmployeeComponent implements OnInit {
     this.employeePageService.isShowNotification = false;
   }
 
-  animationCreated(animationItem: AnimationItem): void {
-  }
-
   @HostListener('scroll', ['$event']) // for scroll events of the current element
-  onScroll(event: Event) {
+  onScroll() {
     var scrollTop = document.getElementById("content-list-e")!.scrollTop;
     var offsetHeight = document.getElementById("content-list-e")!.offsetHeight;
     var scrollHeight = document.getElementById("content-list-e")!.scrollHeight;
@@ -62,31 +56,11 @@ export class ShowEmployeeComponent implements OnInit {
           5,
           this.employeePageService.inputSearch,
           this.employeePageService.getStringMainAttribute(),
-          this.employeePageService.getSortString() == "ASC" ? "asc" : "desc",
+          this.employeePageService.sortString == "ASC" ? "asc" : "desc",
           0
         )
       }
     }
-  }
-
-  public getEmail(email: string) {
-    let result = "";
-    let length = email.length;
-    if (length > 10) {
-      for (let i = 0; i < length / 10; i++) {
-        result += email.substring(i * 10, i * 10 + 10);
-        if (i < length / 10 - 1) {
-          result += "<br>"
-        }
-      }
-      if (length % 10 != 0) {
-        result += "<br>"
-        result += email.substring(result.length, result.length + length % 10)
-      }
-    } else {
-      result = email;
-    }
-    return result;
   }
 
   public requestRemoveItem(id: number): void {
@@ -116,7 +90,7 @@ export class ShowEmployeeComponent implements OnInit {
   }
 
   public editItem(item: Employee) {
-    this.employeePageService.showEditEmployee();
+    this.employeePageService.isEditEmployee =true;
     this.employeePageService.editFirstName = item.firstName!;
     this.employeePageService.editLastName = item.lastName!;
     this.employeePageService.editGender = item.gender!;

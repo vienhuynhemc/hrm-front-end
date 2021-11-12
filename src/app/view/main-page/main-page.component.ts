@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MainPageService } from 'src/app/service/main-page/main-page.service';
 
 @Component({
   selector: 'app-main-page',
@@ -9,10 +7,7 @@ import { MainPageService } from 'src/app/service/main-page/main-page.service';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(
-    public mainPageService: MainPageService
-  ) {
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }

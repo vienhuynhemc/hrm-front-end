@@ -2,12 +2,12 @@
     <div class="header">
         <div class="fillter">
             <select [(ngModel)]="departmentPageService.mainAttribute">
-                <option *ngFor="let item of departmentPageService.getMainAttributes()" [value]="item">{{item}}</option>
+                <option *ngFor="let item of departmentPageService.mainAttributes" [value]="item">{{item}}</option>
             </select>
-            <div class="sort" [style.marginTop]="departmentPageService.getSortString() == 'ASC'?'-5px':'0px'">
-                <i *ngIf=" departmentPageService.getSortString()=='ASC'" class=" fas fa-sort-amount-down asc"
+            <div class="sort" [style.marginTop]="departmentPageService.sortString == 'ASC'?'-5px':'0px'">
+                <i *ngIf=" departmentPageService.sortString=='ASC'" class=" fas fa-sort-amount-down asc"
                     (click)="changeSort('DESC')" matTooltip="Sort by DESC" matTooltipClass="tooltip"></i>
-                <i *ngIf="departmentPageService.getSortString() == 'DESC'" class="fas fa-sort-amount-down-alt desc"
+                <i *ngIf="departmentPageService.sortString == 'DESC'" class="fas fa-sort-amount-down-alt desc"
                     (click)="changeSort('ASC')" matTooltip="Sort by ASC" matTooltipClass="tooltip"></i>
             </div>
             <div class="search">
@@ -42,7 +42,7 @@
                         matTooltipClass="tooltip"></i>
                 </div>
                 <div class="content-anim" *ngIf="departmentPageService.isLoadData">
-                    <main lottie [options]="options" (animationCreated)="animationCreated($event)" class="anim"></main>
+                    <main lottie [options]="options" class="anim"></main>
                 </div>
             </div>
         </div>
@@ -69,8 +69,7 @@
 
 <div class="notification" *ngIf="departmentPageService.isShowNotification">
     <div class="content">
-        <main lottie [options]="notificationService.options"
-            (animationCreated)="notificationService.animationCreated($event)" class="anim"></main>
+        <main lottie [options]="notificationService.options" class="anim"></main>
         <p class="title">{{notificationService.titlePopUpNotificationDepartment}}</p>
         <p class="child">{{notificationService.childPopUpNotificationDepartment}}</p>
         <button class="confirm" (click)="hiddenNotification()">

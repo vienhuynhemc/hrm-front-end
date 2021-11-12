@@ -11,11 +11,11 @@ import { Date } from 'src/app/model/date';
 })
 export class EmployeePageService {
 
-  private isEditEmployee: boolean = false;
+  public isEditEmployee: boolean = false;
   public inputSearch: string = "";
-  private sortString: string = "ASC"
+  public sortString: string = "ASC"
   public mainAttribute: string = "First name"
-  private mainAttributes: string[] = [
+  public mainAttributes: string[] = [
     "First name",
     "Last name",
     "Address",
@@ -76,7 +76,7 @@ export class EmployeePageService {
       25,
       this.inputSearch,
       this.getStringMainAttribute(),
-      this.getSortString() == "ASC" ? "asc" : "desc",
+      this.sortString == "ASC" ? "asc" : "desc",
       event
     );
   }
@@ -90,24 +90,27 @@ export class EmployeePageService {
           this.employees = [];
         }
         for (let i = 0; i < data.data.length; i++) {
-          let employee = new Employee();
-          employee.id = data.data[i].id;
-          employee.firstName = data.data[i].firstName;
-          employee.lastName = data.data[i].lastName;
-          employee.gender = data.data[i].gender;
-          let date = new Date();
-          date.year = data.data[i].doB[0];
-          date.month = data.data[i].doB[1];
-          date.day = data.data[i].doB[2];
-          employee.doB = date;
-          employee.email = data.data[i].email;
-          employee.address = data.data[i].address;
-          employee.city = data.data[i].city;
-          let department = new Department();
-          department.id = data.data[i].department.id;
-          department.name = data.data[i].department.name;
-          department.location = data.data[i].department.location;
-          employee.department = department;
+          let employee: Employee = {
+            id: data.data[i].id,
+            address: data.data[i].address,
+            city: data.data[i].city,
+            department: {
+              id: data.data[i].department.id,
+              location: data.data[i].department.location,
+              member: 0,
+              name: data.data[i].department.name,
+            },
+            doB: {
+              day: data.data[i].doB[2],
+              format: this.getFormat(data.data[i].doB[2], data.data[i].doB[1], data.data[i].doB[0]),
+              month: data.data[i].doB[1],
+              year: data.data[i].doB[0],
+            },
+            email: data.data[i].email,
+            firstName: data.data[i].firstName,
+            gender: data.data[i].gender,
+            lastName: data.data[i].lastName,
+          };
           this.employees.push(employee);
         }
         if (data.data.length < max || data.data.length == 0) {
@@ -116,6 +119,12 @@ export class EmployeePageService {
         this.isLoadData = false;
       })
     }, 1000);
+  }
+
+  public getFormat(day: number, month: number, year: number): string {
+    let d = day < 10 ? "0" + day : day;
+    let m = month < 10 ? "0" + month : month;
+    return `${d}/${m}/${year}`;
   }
 
   public addNewEmployee(body: object) {
@@ -150,7 +159,7 @@ export class EmployeePageService {
         } else {
           this.notificationService.titlePopUpNotificationEmployee = "Success";
           this.notificationService.childPopUpNotificationEmployee = `You have successfully updated the employee #${this.editId}`;
-          this.hiddenEditEmployee();
+          this.isEditEmployee = false;
           this.loadData(0);
         }
       })
@@ -183,29 +192,4 @@ export class EmployeePageService {
     return this.httpClient.put<any>(url, body);
   }
 
-
-
-  public isShowEditEmployee(): boolean {
-    return this.isEditEmployee;
-  }
-
-  public showEditEmployee(): void {
-    this.isEditEmployee = true;
-  }
-
-  public hiddenEditEmployee(): void {
-    this.isEditEmployee = false;
-  }
-
-  public getMainAttributes(): string[] {
-    return this.mainAttributes;
-  }
-
-  public getSortString(): string {
-    return this.sortString;
-  }
-
-  public changeSort(newSort: string): void {
-    this.sortString = newSort;
-  }
 }
