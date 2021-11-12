@@ -28,7 +28,7 @@
             <p>Number of employees</p>
         </div>
         <div class="list">
-            <div id="content-list" class="content-list" (scroll)="onScroll($event)">
+            <div id="content-list" class="content-list" (scroll)="onScroll()">
                 <div class="line" *ngFor="let item of departmentPageService.departments">
                     <p>{{item.id}}</p>
                     <p>{{item.name}}</p>

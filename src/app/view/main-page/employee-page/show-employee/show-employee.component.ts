@@ -46,9 +46,9 @@ export class ShowEmployeeComponent implements OnInit {
 
   @HostListener('scroll', ['$event']) // for scroll events of the current element
   onScroll() {
-    var scrollTop = document.getElementById("content-list-e")!.scrollTop;
-    var offsetHeight = document.getElementById("content-list-e")!.offsetHeight;
-    var scrollHeight = document.getElementById("content-list-e")!.scrollHeight;
+    let scrollTop = document.getElementById("content-list-e")!.scrollTop;
+    let offsetHeight = document.getElementById("content-list-e")!.offsetHeight;
+    let scrollHeight = document.getElementById("content-list-e")!.scrollHeight;
     if (!this.employeePageService.isLoadData && !this.employeePageService.isOutOfData) {
       if (scrollTop + offsetHeight > scrollHeight) {
         this.employeePageService.getListEmployee(

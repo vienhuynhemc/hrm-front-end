@@ -47,10 +47,10 @@ export class ShowDepartmentComponent implements OnInit {
   }
 
   @HostListener('scroll', ['$event']) // for scroll events of the current element
-  onScroll(event: Event) {
-    var scrollTop = document.getElementById("content-list")!.scrollTop;
-    var offsetHeight = document.getElementById("content-list")!.offsetHeight;
-    var scrollHeight = document.getElementById("content-list")!.scrollHeight;
+  onScroll() {
+    let scrollTop = document.getElementById("content-list")!.scrollTop;
+    let offsetHeight = document.getElementById("content-list")!.offsetHeight;
+    let scrollHeight = document.getElementById("content-list")!.scrollHeight;
     if (!this.departmentPageService.isLoadData && !this.departmentPageService.isOutOfData) {
       if (scrollTop + offsetHeight > scrollHeight) {
         this.departmentPageService.getListDepartment(
