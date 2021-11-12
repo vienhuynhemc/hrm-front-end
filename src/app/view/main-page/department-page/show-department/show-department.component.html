@@ -13,7 +13,7 @@
             <div class="search">
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="Search..." [(ngModel)]="departmentPageService.inputSearch"
-                    (ngModelChange)="changeSearch($event)">
+                    (ngModelChange)="changeSearch()">
             </div>
             <div class="show-found">
                 <p>Show {{departmentPageService.departments.length}} lines</p>

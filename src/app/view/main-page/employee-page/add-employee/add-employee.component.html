@@ -1,50 +1,49 @@
-<div class="add-employee">
+<div class="add-employee" [formGroup]="form">
   <div class="title">
     <p>Add Employee</p>
   </div>
   <div class="line">
   </div>
-
   <div class="input-data">
     <i class="fas fa-signature"></i>
-    <input type="text" placeholder="First name" [(ngModel)]="firstName">
+    <input type="text" placeholder="First name" formControlName="firstName">
   </div>
 
   <div class="input-data">
     <i class="fas fa-signature"></i>
-    <input type="text" placeholder="Last name" [(ngModel)]="lastName">
+    <input type="text" placeholder="Last name" formControlName="lastName">
   </div>
 
   <div class="input-data">
     <i class="far fa-envelope"></i>
-    <input type="text" placeholder="Email" [(ngModel)]="email">
+    <input type="text" placeholder="Email" formControlName="email">
   </div>
 
   <div class="input-data">
     <i class="fas fa-map-marker-alt"></i>
-    <input type="text" placeholder="Address" [(ngModel)]="address">
+    <input type="text" placeholder="Address" formControlName="address">
   </div>
 
   <div class="input-data">
     <i class="fas fa-city"></i>
-    <input type="text" placeholder="City" [(ngModel)]="city">
+    <input type="text" placeholder="City" formControlName="city">
   </div>
 
   <div class="input-data">
     <i class="fas fa-transgender-alt"></i>
-    <select [(ngModel)]="gender">
+    <select formControlName="gender">
       <option *ngFor="let item of employeePageService.gender" [value]="item">{{item}}</option>
     </select>
   </div>
 
   <div class="input-data">
     <i class="fas fa-birthday-cake"></i>
-    <input type="datetime-local" [ngModel]="date | date:'yyyy-MM-ddTHH:mm'" (ngModelChange)="date = $event"/>
+    <input type="datetime-local" formControlName="date"/>
   </div>
 
   <div class="input-data">
     <i class="far fa-id-card"></i>
-    <select [(ngModel)]="id" style="padding-right: 115px;">
+    <select formControlName="id" style="padding-right: 115px;">
       <option *ngFor="let item of ids" [value]="item">{{item}}</option>
     </select>
   </div>

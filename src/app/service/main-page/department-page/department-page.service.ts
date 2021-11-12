@@ -3,6 +3,7 @@ import {environment} from '../../../../environments/environment.prod';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Department} from 'src/app/model/department';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -27,16 +28,21 @@ export class DepartmentPageService {
   public isOutOfData: boolean = false;
   public departments: Department[] = [];
 
-  public editName: string = "";
-  public editLocation: string = "";
   public editId: number = 0;
 
   public idDepartmentNeedRemove: number = 0;
   public isShowPopupRequest: boolean = false;
   public isShowNotification: boolean = false;
   public isProcessRemove: boolean = false;
+  public form:FormGroup = this.formBuilder.group(
+    {
+      editName:['',[Validators.required]],
+      editLocation:[''],
+    }
+  )
 
   constructor(
+    private formBuilder:FormBuilder,
     private httpClient: HttpClient,
     private notificationService: NotificationService
   ) {
@@ -102,7 +108,7 @@ export class DepartmentPageService {
   }
 
   public saveItem() {
-    if (this.editName.trim().length > 0) {
+    if (this.form.valid) {
       this.saveDepartment().subscribe(data => {
         console.log(data);
         this.isEditDepartment = false;
@@ -124,8 +130,8 @@ export class DepartmentPageService {
     const url = `${environment.REST_API}department`;
     let body = {
       id: this.editId,
-      name: this.editName,
-      location: this.editLocation
+      name: this.form.value.editName,
+      location: this.form.value.editLocation
     }
     return this.httpClient.put<any>(url, body);
   }

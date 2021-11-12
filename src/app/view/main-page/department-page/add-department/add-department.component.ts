@@ -1,6 +1,7 @@
-import { NotificationService } from './../../../../service/notification/notification.service';
-import { DepartmentPageService } from 'src/app/service/main-page/department-page/department-page.service';
-import { Component, OnInit } from '@angular/core';
+import {NotificationService} from '../../../../service/notification/notification.service';
+import {DepartmentPageService} from 'src/app/service/main-page/department-page/department-page.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-add-department',
@@ -9,23 +10,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddDepartmentComponent implements OnInit {
 
-  public location: string = "HOCHIMINH"
-  public name: string = ""
+  public form: FormGroup = this.formBuilder.group(
+    {
+      location: ['HOCHIMINH',],
+      name: ['', [Validators.required]],
+    }
+  );
 
   constructor(
     public departmentPageService: DepartmentPageService,
-    public notificationService: NotificationService
-  ) { }
+    public notificationService: NotificationService,
+    private formBuilder: FormBuilder,
+  ) {
+  }
 
   public addDepartment(): void {
-    if (this.name.trim().length != 0) {
-      let body = {
-        name: this.name,
-        location: this.location
-      };
-      this.departmentPageService.addNewDepartment(body).subscribe(data => {
+    if (this.form.valid) {
+      this.departmentPageService.addNewDepartment(this.form.value).subscribe(data => {
         console.log(data);
-        this.name = "";
+        this.form.patchValue({
+          name: "",
+        });
         this.departmentPageService.loadData(0);
         this.departmentPageService.isShowNotification = true;
         this.notificationService.titlePopUpNotificationDepartment = "Success";

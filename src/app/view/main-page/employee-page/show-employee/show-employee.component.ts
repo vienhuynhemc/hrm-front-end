@@ -18,7 +18,8 @@ export class ShowEmployeeComponent implements OnInit {
   constructor(
     public employeePageService: EmployeePageService,
     public notificationService: NotificationService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.employeePageService.isLoadData = false;
@@ -90,18 +91,22 @@ export class ShowEmployeeComponent implements OnInit {
   }
 
   public editItem(item: Employee) {
-    this.employeePageService.isEditEmployee =true;
-    this.employeePageService.editFirstName = item.firstName!;
-    this.employeePageService.editLastName = item.lastName!;
-    this.employeePageService.editGender = item.gender!;
-    this.employeePageService.editAddress = item.address!;
-    this.employeePageService.editEmail = item.email!;
+    this.employeePageService.isEditEmployee = true;
     this.employeePageService.editId = item.id!;
-    this.employeePageService.editDepartmentId = item.department?.id!;
-    this.employeePageService.editCity = item.city!;
     let month = item.doB?.month! < 10 ? "0" + item.doB?.month : item.doB?.month;
     let day = item.doB?.day! < 10 ? "0" + item.doB?.day : item.doB?.day;
-    this.employeePageService.editDoB = `${item.doB?.year}-${month}-${day}T00:00`;
+    this.employeePageService.form.patchValue(
+      {
+        editFirstName: item.firstName,
+        editLastName: item.lastName,
+        editGender: item.gender,
+        editAddress: item.address,
+        editEmail: item.email,
+        editDepartmentId: item.department.id,
+        editCity: item.city,
+        editDoB: `${item.doB?.year}-${month}-${day}T00:00`,
+      }
+    );
   }
 
 }

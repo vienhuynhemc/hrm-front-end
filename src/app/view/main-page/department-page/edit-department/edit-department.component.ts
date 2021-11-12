@@ -1,5 +1,5 @@
-import { NotificationService } from './../../../../service/notification/notification.service';
-import { DepartmentPageService } from './../../../../service/main-page/department-page/department-page.service';
+import { NotificationService } from '../../../../service/notification/notification.service';
+import { DepartmentPageService } from '../../../../service/main-page/department-page/department-page.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

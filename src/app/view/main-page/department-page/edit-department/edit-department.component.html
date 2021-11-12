@@ -1,29 +1,29 @@
 <div *ngIf="departmentPageService.isEditDepartment" class="edit-department">
-    <div class="body">
-        <div class="title">
-            <p>Edit Department #{{departmentPageService.editId}}</p>
-        </div>
-        <div class="line">
-        </div>
-
-        <div class="input-data">
-            <i class="fas fa-signature"></i>
-            <input type="text" placeholder="Department name" [(ngModel)]="departmentPageService.editName">
-        </div>
-
-        <div class="input-data">
-            <i class="fas fa-map-marker-alt"></i>
-            <select [(ngModel)]="departmentPageService.editLocation">
-                <option *ngFor="let item of departmentPageService.locations" [value]="item">{{item}}</option>
-            </select>
-        </div>
-
-        <div class="add" (click)="requestSaveDepartment()">
-            <p>Save</p>
-        </div>
-
-        <div class="back" (click)="back()">
-            <p>Back</p>
-        </div>
+  <div class="body" [formGroup]="departmentPageService.form">
+    <div class="title">
+      <p>Edit Department #{{departmentPageService.editId}}</p>
     </div>
+    <div class="line">
+    </div>
+
+    <div class="input-data">
+      <i class="fas fa-signature"></i>
+      <input type="text" placeholder="Department name" formControlName="editName">
+    </div>
+
+    <div class="input-data">
+      <i class="fas fa-map-marker-alt"></i>
+      <select formControlName="editLocation">
+        <option *ngFor="let item of departmentPageService.locations" [value]="item">{{item}}</option>
+      </select>
+    </div>
+
+    <div class="add" (click)="requestSaveDepartment()">
+      <p>Save</p>
+    </div>
+
+    <div class="back" (click)="back()">
+      <p>Back</p>
+    </div>
+  </div>
 </div>

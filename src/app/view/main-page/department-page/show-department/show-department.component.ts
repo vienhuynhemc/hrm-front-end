@@ -1,9 +1,9 @@
-import { NotificationService } from './../../../../service/notification/notification.service';
-import { Component, HostListener, OnInit } from '@angular/core';
-import { DepartmentPageService } from 'src/app/service/main-page/department-page/department-page.service';
+import {NotificationService} from '../../../../service/notification/notification.service';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {DepartmentPageService} from 'src/app/service/main-page/department-page/department-page.service';
 // lottie
-import { AnimationOptions } from 'ngx-lottie';
-import { Department } from 'src/app/model/department';
+import {AnimationOptions} from 'ngx-lottie';
+import {Department} from 'src/app/model/department';
 
 @Component({
   selector: 'app-show-department',
@@ -19,7 +19,8 @@ export class ShowDepartmentComponent implements OnInit {
   constructor(
     public departmentPageService: DepartmentPageService,
     public notificationService: NotificationService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.departmentPageService.isLoadData = false;
@@ -28,9 +29,7 @@ export class ShowDepartmentComponent implements OnInit {
     this.departmentPageService.loadData(0);
   }
 
-
-
-  public changeSearch(value: string) {
+  public changeSearch() {
     this.departmentPageService.loadData(1);
   }
 
@@ -41,8 +40,10 @@ export class ShowDepartmentComponent implements OnInit {
 
   public editItem(item: Department) {
     this.departmentPageService.isEditDepartment = true;
-    this.departmentPageService.editName = item.name!;
-    this.departmentPageService.editLocation = item.location!;
+    this.departmentPageService.form.patchValue({
+      editName:item.name,
+      editLocation:item.location,
+    });
     this.departmentPageService.editId = item.id!;
   }
 

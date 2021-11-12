@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Employee} from '../../../model/employee';
 import {Injectable} from '@angular/core';
 import {environment} from 'src/environments/environment.prod';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -30,15 +31,19 @@ export class EmployeePageService {
   public isOutOfData: boolean = false;
   public employees: Employee[] = [];
 
-  public editFirstName: string = "";
-  public editLastName: string = "";
-  public editGender: string = "";
   public editId: number = 0;
-  public editDoB: string | undefined;
-  public editEmail: string = "";
-  public editAddress: string = "";
-  public editCity = "";
-  public editDepartmentId: number = 0;
+  public form: FormGroup = this.formBuilder.group(
+    {
+      editGender: ['',],
+      editFirstName: ['', [Validators.required]],
+      editLastName: ['', [Validators.required]],
+      editAddress: ['', [Validators.required]],
+      editCity: ['', [Validators.required]],
+      editEmail: ['', [Validators.required, Validators.email]],
+      editDepartmentId: ['',],
+      editDoB: ['',]
+    }
+  );
 
   public idEmployeeNeedRemove: number = 0;
   public isShowPopupRequest: boolean = false;
@@ -47,7 +52,8 @@ export class EmployeePageService {
 
   constructor(
     private httpClient: HttpClient,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private formBuilder: FormBuilder,
   ) {
   }
 
@@ -142,19 +148,14 @@ export class EmployeePageService {
   }
 
   public saveItem() {
-    if (this.editFirstName.trim().length != 0
-      && this.editLastName.trim().length != 0
-      && this.editEmail.trim().length != 0
-      && this.editAddress.trim().length != 0
-      && this.editCity.trim().length != 0
-    ) {
+    if (this.form.valid) {
       this.saveEmployee().subscribe(data => {
         console.log(data);
         this.isShowPopupRequest = false;
         this.isShowNotification = true;
         if (data.message == "Exists email") {
           this.notificationService.titlePopUpNotificationEmployee = "Failure";
-          this.notificationService.childPopUpNotificationEmployee = `Already exists staff with email: ${this.editEmail}`;
+          this.notificationService.childPopUpNotificationEmployee = `Already exists staff with email: ${this.form.value.editEmail}`;
         } else {
           this.notificationService.titlePopUpNotificationEmployee = "Success";
           this.notificationService.childPopUpNotificationEmployee = `You have successfully updated the employee #${this.editId}`;
@@ -179,14 +180,14 @@ export class EmployeePageService {
     const url = `${environment.REST_API}employee/${this.editId}`;
     console.log(url);
     let body = {
-      address: this.editAddress,
-      city: this.editCity,
-      doB: this.editDoB!.slice(0, 10),
-      email: this.editEmail,
-      firstName: this.editFirstName,
-      lastName: this.editLastName,
-      gender: this.editGender,
-      department: this.editDepartmentId,
+      address: this.form.value.editAddress,
+      city: this.form.value.editCity,
+      doB: this.form.value.editDoB.slice(0, 10),
+      email: this.form.value.editEmail,
+      firstName: this.form.value.editFirstName,
+      lastName: this.form.value.editLastName,
+      gender: this.form.value.editGender,
+      department: parseInt(this.form.value.editDepartmentId),
     }
     return this.httpClient.put<any>(url, body);
   }

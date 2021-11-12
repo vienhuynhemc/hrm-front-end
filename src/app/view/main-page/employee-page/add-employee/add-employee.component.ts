@@ -1,6 +1,7 @@
 import {NotificationService} from '../../../../service/notification/notification.service';
 import {EmployeePageService} from '../../../../service/main-page/employee-page/employee-page.service';
 import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-add-employee',
@@ -9,19 +10,25 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AddEmployeeComponent implements OnInit {
 
-  public gender: string = "MALE";
-  public firstName: string = "";
-  public lastName: string = "";
-  public address: string = "";
-  public city: string = "";
-  public email: string = "";
-  public date: string = new Date().toISOString().slice(0, 16);
-  public id: string = "";
   public ids: string[] = [];
+
+  public form: FormGroup = this.formBuilder.group(
+    {
+      gender: ['MALE',],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      id: ['',],
+      date: [new Date().toISOString().slice(0, 16),]
+    }
+  );
 
   constructor(
     public employeePageService: EmployeePageService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private formBuilder: FormBuilder,
   ) {
   }
 
@@ -30,46 +37,48 @@ export class AddEmployeeComponent implements OnInit {
       for (let i = 0; i < data.data.length; i++) {
         this.ids.push(data.data[i].id);
       }
-      this.id = this.ids[0];
+      this.form.patchValue(
+        {
+          id: this.ids[0] + "",
+        }
+      );
     })
   }
 
   public addEmployee(): void {
-    if (this.firstName.trim().length != 0
-      && this.lastName.trim().length != 0
-      && this.email.trim().length != 0
-      && this.address.trim().length != 0
-      && this.city.trim().length != 0
-    ) {
+    if (this.form.valid) {
       let body = {
-        address: this.address,
-        city: this.city,
-        doB: this.date.slice(0, 10),
-        email: this.email,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        gender: this.gender,
-        department: parseInt(this.id),
+        address: this.form.value.address,
+        city: this.form.value.city,
+        doB: this.form.value.date.slice(0, 10),
+        email: this.form.value.email,
+        firstName: this.form.value.firstName,
+        lastName: this.form.value.lastName,
+        gender: this.form.value.gender,
+        department: parseInt(this.form.value.id),
       };
       this.employeePageService.addNewEmployee(body).subscribe(data => {
         console.log(data);
         this.employeePageService.isShowNotification = true;
         if (data.status == "500 INTERNAL_SERVER_ERROR") {
           this.notificationService.titlePopUpNotificationEmployee = "Failure";
-          this.notificationService.childPopUpNotificationEmployee = `Already exists staff with email: ${this.email}`;
+          this.notificationService.childPopUpNotificationEmployee = `Already exists staff with email: ${this.form.value.email}`;
         } else {
           this.notificationService.titlePopUpNotificationEmployee = "Success";
           this.notificationService.childPopUpNotificationEmployee = `You have successfully added the employee #${data.data.id}`;
-          this.firstName = "";
-          this.lastName = "";
-          this.email = "";
-          this.address = "";
-          this.city = "";
+          this.form.patchValue(
+            {
+              firstName: "",
+              lastName: "",
+              email: "",
+              address: "",
+              city: "",
+            }
+          );
           this.employeePageService.loadData(0);
         }
       });
     }
   }
-
 
 }
