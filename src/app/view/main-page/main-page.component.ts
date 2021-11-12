@@ -10,23 +10,11 @@ import { MainPageService } from 'src/app/service/main-page/main-page.service';
 export class MainPageComponent implements OnInit {
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    public mainPageService:MainPageService
+    public mainPageService: MainPageService
   ) {
   }
 
   ngOnInit(): void {
   }
 
-  ///////////////////////////////////////
-  // Các hàm di chuyển trang
-  moveToDepartmentPage(): void {
-    this.router.navigate(['department'], { relativeTo: this.route });
-  }
-  moveToEmployeePage(): void {
-    this.router.navigate(['employee'], { relativeTo: this.route });
-  }
-  //////////////////////////////////////////
-  
 }

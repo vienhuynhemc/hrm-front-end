@@ -39,9 +39,7 @@
 
     <div class="input-data">
         <i class="fas fa-birthday-cake"></i>
-        <input type="datetime-local" 
-       [ngModel]="date | date:'yyyy-MM-ddTHH:mm'"
-       (ngModelChange)="date = $event" />
+        <input type="datetime-local" [ngModel]="date | date:'yyyy-MM-ddTHH:mm'" (ngModelChange)="date = $event" />
     </div>
 
     <div class="input-data">

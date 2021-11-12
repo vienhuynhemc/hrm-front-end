@@ -15,9 +15,9 @@
                 <input type="text" placeholder="Search..." [(ngModel)]="employeePageService.inputSearch"
                     (ngModelChange)="changeSearch($event)">
             </div>
-        </div>
-        <div class="show-found">
-            <p>Show {{employeePageService.employees.length}} lines</p>
+            <div class="show-found">
+                <p>Show {{employeePageService.employees.length}} lines</p>
+            </div>
         </div>
     </div>
     <div class="content">

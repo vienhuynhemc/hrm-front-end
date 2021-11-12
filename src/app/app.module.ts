@@ -15,7 +15,7 @@ export function playerFactory() {
 import { HttpClientModule } from '@angular/common/http';
 // tooltip
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundPageComponent } from './view/not-found-page/not-found-page.component';
 import { MainPageComponent } from './view/main-page/main-page.component';
 import { DepartmentPageComponent } from './view/main-page/department-page/department-page.component';

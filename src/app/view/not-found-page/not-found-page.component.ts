@@ -27,8 +27,4 @@ export class NotFoundPageComponent implements OnInit {
   animationCreated(animationItem: AnimationItem): void {
   }
 
-  back(): void {
-    this.router.navigate(['/main']);
-  }
-
 }

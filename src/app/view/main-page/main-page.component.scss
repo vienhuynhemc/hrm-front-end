@@ -1,8 +1,12 @@
 * {
-    margin: 0;
-    padding: 0;
-  }
-  
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+
   .container {
     width: 1244px;
     display: flex;
@@ -12,7 +16,7 @@
     box-shadow: 0 0 73px 10px #d7e2edd6;
     border-radius: 40px;
     margin: 50px;
-  
+
     &-left {
       position: relative;
       border-top-left-radius: 40px;
@@ -23,7 +27,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-  
+
       &-icon {
         margin-top: 40px;
         i {
@@ -31,7 +35,7 @@
           color: #23262e;
         }
       }
-  
+
       &-avatar {
         margin-top: 40px;
         width: 66px;
@@ -41,7 +45,7 @@
         align-items: center;
         border: 2px solid #eef2fb;
         border-radius: 50%;
-  
+
         &-image {
           display: flex;
           justify-content: center;
@@ -51,13 +55,13 @@
           height: 60px;
           overflow: hidden;
           border-radius: 50%;
-  
+
           img {
             width: 60px;
           }
         }
       }
-  
+
       &-menu {
         margin-top: 30px;
         i {
@@ -73,12 +77,12 @@
           cursor: pointer;
           margin-top: 20px;
           margin-bottom: 20px;
-  
+
           i {
             color: #23262e;
           }
         }
-  
+
         &-icon-selected {
           background-color: #3275f7;
           transform: translateX(-40px);
@@ -90,4 +94,4 @@
       }
     }
   }
-  
+}
