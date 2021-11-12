@@ -1,6 +1,6 @@
 export interface Date {
-    day: number;
-    month: number;
-    year: number;
-    format: string;
+  day: number;
+  month: number;
+  year: number;
+  format: string;
 }

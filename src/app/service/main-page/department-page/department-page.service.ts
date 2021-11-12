@@ -1,8 +1,8 @@
-import { NotificationService } from './../../notification/notification.service';
-import { environment } from './../../../../environments/environment.prod';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Department } from 'src/app/model/department';
+import {NotificationService} from '../../notification/notification.service';
+import {environment} from '../../../../environments/environment.prod';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Department} from 'src/app/model/department';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +39,8 @@ export class DepartmentPageService {
   constructor(
     private httpClient: HttpClient,
     private notificationService: NotificationService
-  ) { }
+  ) {
+  }
 
   public loadData(event: number) {
     this.isOutOfData = false;

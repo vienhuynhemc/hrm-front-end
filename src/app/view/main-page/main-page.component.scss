@@ -30,6 +30,7 @@
 
       &-icon {
         margin-top: 40px;
+
         i {
           font-size: 30px;
           color: #23262e;
@@ -50,7 +51,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          box-shadow: 0px 8px 20px #d9f0f3;
+          box-shadow: 0 8px 20px #d9f0f3;
           width: 60px;
           height: 60px;
           overflow: hidden;
@@ -64,9 +65,11 @@
 
       &-menu {
         margin-top: 30px;
+
         i {
           font-size: 25px;
         }
+
         &-icon {
           display: flex;
           justify-content: center;
@@ -87,6 +90,7 @@
           background-color: #3275f7;
           transform: translateX(-40px);
           box-shadow: 0 0 40px #3275f7e0;
+
           i {
             color: white;
           }

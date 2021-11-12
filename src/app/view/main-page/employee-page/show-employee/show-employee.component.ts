@@ -1,8 +1,8 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { AnimationOptions } from 'ngx-lottie';
-import { Employee } from 'src/app/model/employee';
-import { EmployeePageService } from './../../../../service/main-page/employee-page/employee-page.service';
-import { NotificationService } from './../../../../service/notification/notification.service';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {AnimationOptions} from 'ngx-lottie';
+import {Employee} from 'src/app/model/employee';
+import {EmployeePageService} from '../../../../service/main-page/employee-page/employee-page.service';
+import {NotificationService} from '../../../../service/notification/notification.service';
 
 @Component({
   selector: 'app-show-employee',
@@ -101,8 +101,7 @@ export class ShowEmployeeComponent implements OnInit {
     this.employeePageService.editCity = item.city!;
     let month = item.doB?.month! < 10 ? "0" + item.doB?.month : item.doB?.month;
     let day = item.doB?.day! < 10 ? "0" + item.doB?.day : item.doB?.day;
-    let date = `${item.doB?.year}-${month}-${day}T00:00`;
-    this.employeePageService.editDoB = date;
+    this.employeePageService.editDoB = `${item.doB?.year}-${month}-${day}T00:00`;
   }
 
 }

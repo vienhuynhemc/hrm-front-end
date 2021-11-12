@@ -1,6 +1,6 @@
-import { NotificationService } from './../../../../service/notification/notification.service';
-import { EmployeePageService } from './../../../../service/main-page/employee-page/employee-page.service';
-import { Component, OnInit } from '@angular/core';
+import {NotificationService} from '../../../../service/notification/notification.service';
+import {EmployeePageService} from '../../../../service/main-page/employee-page/employee-page.service';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-edit-employee',
@@ -14,7 +14,8 @@ export class EditEmployeeComponent implements OnInit {
   constructor(
     public employeePageService: EmployeePageService,
     public notificationService: NotificationService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.employeePageService.getAllIdDepartment().subscribe(data => {

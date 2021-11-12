@@ -1,10 +1,8 @@
-import { NotificationService } from './../../notification/notification.service';
-import { Department } from './../../../model/department';
-import { HttpClient } from '@angular/common/http';
-import { Employee } from './../../../model/employee';
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment.prod';
-import { Date } from 'src/app/model/date';
+import {NotificationService} from '../../notification/notification.service';
+import {HttpClient} from '@angular/common/http';
+import {Employee} from '../../../model/employee';
+import {Injectable} from '@angular/core';
+import {environment} from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +48,8 @@ export class EmployeePageService {
   constructor(
     private httpClient: HttpClient,
     private notificationService: NotificationService
-  ) { }
+  ) {
+  }
 
   public getStringMainAttribute(): string {
     if (this.mainAttribute == 'Last name') {

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { AnimationOptions } from 'ngx-lottie';
+import {Injectable} from '@angular/core';
+import {AnimationOptions} from 'ngx-lottie';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +20,6 @@ export class NotificationService {
   public titlePopUpNotificationEmployee: string = "";
   public childPopUpNotificationEmployee: string = "";
 
-  constructor() { }
+  constructor() {
+  }
 }
