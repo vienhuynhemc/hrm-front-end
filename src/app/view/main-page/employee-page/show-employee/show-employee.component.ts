@@ -109,4 +109,7 @@ export class ShowEmployeeComponent implements OnInit {
     );
   }
 
+  public requestAddItem(): void {
+    this.employeePageService.isAddEmployee = true;
+  }
 }

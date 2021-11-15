@@ -66,19 +66,26 @@ export class AddEmployeeComponent implements OnInit {
         } else {
           this.notificationService.titlePopUpNotificationEmployee = "Success";
           this.notificationService.childPopUpNotificationEmployee = `You have successfully added the employee #${data.data.id}`;
-          this.form.patchValue(
-            {
-              firstName: "",
-              lastName: "",
-              email: "",
-              address: "",
-              city: "",
-            }
-          );
           this.employeePageService.loadData(0);
         }
       });
     }
+  }
+
+  public back(): void {
+    this.employeePageService.isAddEmployee= false;
+  }
+
+  public clear(): void {
+    this.form.patchValue(
+      {
+        firstName: "",
+        lastName: "",
+        email: "",
+        address: "",
+        city: "",
+      }
+    );
   }
 
 }

@@ -28,9 +28,6 @@ export class AddDepartmentComponent implements OnInit {
     if (this.form.valid) {
       this.departmentPageService.addNewDepartment(this.form.value).subscribe(data => {
         console.log(data);
-        this.form.patchValue({
-          name: "",
-        });
         this.departmentPageService.loadData(0);
         this.departmentPageService.isShowNotification = true;
         this.notificationService.titlePopUpNotificationDepartment = "Success";
@@ -40,6 +37,12 @@ export class AddDepartmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  public clear():void{
+    this.form.patchValue({
+      name: "",
+    });
   }
 
 }

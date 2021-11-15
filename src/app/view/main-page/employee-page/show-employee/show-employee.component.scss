@@ -4,11 +4,11 @@
 }
 
 .show-employee {
-  width: 803px;
+  width: 1104px;
   position: absolute;
   height: 760px;
   top: 20px;
-  left: 321px;
+  left: 20px;
 
   .header {
     display: flex;
@@ -63,7 +63,7 @@
         border: 1px solid #eef0f5;
         height: 25px;
         align-items: center;
-        width: 441px;
+        width: 650px;
 
         i {
           margin-left: 10px;
@@ -98,6 +98,28 @@
     }
   }
 
+  .button-add {
+    cursor: pointer;
+    display: flex;
+    background: #3275f7;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    width: 200px;
+    height: 40px;
+    border-radius: 12px;
+    box-shadow: 4px 8px 28px 0 #d3dceb;
+    color: white;
+
+    p {
+      margin: 0;
+      margin-left: 10px;
+      font-family: sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
   .content {
     margin-top: 20px;
 
@@ -111,42 +133,42 @@
 
       :nth-child(1) {
         margin: 0;
-        margin-left: 10px;
+        margin-left: 35px;
       }
 
       :nth-child(2) {
         margin: 0;
-        margin-left: 15px;
+        margin-left: 60px;
       }
 
       :nth-child(3) {
         margin: 0;
-        margin-left: 25px;
+        margin-left: 50px;
       }
 
       :nth-child(4) {
         margin: 0;
-        margin-left: 15px;
+        margin-left: 50px;
       }
 
       :nth-child(5) {
         margin: 0;
-        margin-left: 15px;
+        margin-left: 85px;
       }
 
       :nth-child(6) {
         margin: 0;
-        margin-left: 55px;
+        margin-left: 85px;
       }
 
       :nth-child(7) {
         margin: 0;
-        margin-left: 69px;
+        margin-left: 125px;
       }
 
       :nth-child(8) {
         margin: 0;
-        margin-left: 50px;
+        margin-left: 70px;
       }
 
       :nth-child(9) {
@@ -157,12 +179,12 @@
 
     .list {
       margin-top: 10px;
-      height: 665px;
+      height: 605px;
       overflow: hidden;
 
       .content-list {
-        height: 682px;
-        width: 803px;
+        height: 622px;
+        width: 1104px;
         scroll-behavior: smooth;
         overflow: scroll;
 
@@ -208,38 +230,38 @@
           }
 
           :nth-child(1) {
-            margin-left: 5px;
-            width: 20px;
+            margin-left: 28px;
+            width: 45px
           }
 
           :nth-child(2) {
-            margin-left: 5px;
-            width: 92px;
+            margin-left: 28px;
+            width: 113px;
           }
 
           :nth-child(3) {
-            margin-left: 6px;
-            width: 67px;
+            margin-left: 9px;
+            width: 105px;
           }
 
           :nth-child(4) {
-            margin-left: 17px;
-            width: 56px;
+            margin-left: 13px;
+            width: 128px;
           }
 
           :nth-child(5) {
-            margin-left: 7px;
-            width: 82px;
+            margin-left: 6px;
+            width: 104px;
           }
 
           :nth-child(6) {
-            margin-left: 3px;
-            width: 100px;
+            margin-left: 9px;
+            width: 147px;
           }
 
           :nth-child(7) {
-            margin-left: 5px;
-            width: 99px;
+            margin-left: 16px;
+            width: 117px;
           }
 
           :nth-child(8) {
@@ -253,11 +275,11 @@
           }
 
           :nth-child(10) {
-            margin-left: 20px;
+            margin-left: 15px;
           }
 
           :nth-child(11) {
-            margin-left: 20px;
+            margin-left: 10px;
           }
 
           i {

@@ -50,6 +50,8 @@ export class EmployeePageService {
   public isShowNotification: boolean = false;
   public isProcessRemove: boolean = false;
 
+  public isAddEmployee:boolean =false;
+
   constructor(
     private httpClient: HttpClient,
     private notificationService: NotificationService,

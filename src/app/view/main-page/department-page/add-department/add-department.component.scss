@@ -92,4 +92,27 @@
       margin: 0;
     }
   }
+
+  .back {
+    cursor: pointer;
+    width: 222px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #9795b4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+    p {
+      letter-spacing: 1px;
+      font-family: Raleway;
+      font-size: 15px;
+      color: #fff;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
 }
