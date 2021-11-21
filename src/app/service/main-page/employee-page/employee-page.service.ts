@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Employee} from '../../../model/employee';
 import {Injectable} from '@angular/core';
 import {environment} from 'src/environments/environment.prod';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -149,6 +149,11 @@ export class EmployeePageService {
     return this.httpClient.get<any>(url);
   }
 
+  public checkEmail(email:string,id:number){
+    const url = `${environment.REST_API}employee/find?email=${email}&id=${id}`;
+    return this.httpClient.get<any>(url);
+  }
+
   public saveItem() {
     if (this.form.valid) {
       this.saveEmployee().subscribe(data => {
@@ -190,6 +195,20 @@ export class EmployeePageService {
       department: parseInt(this.form.value.editDepartmentId),
     }
     return this.httpClient.put<any>(url, body);
+  }
+
+  public validatorMinLengthFirstName(c: AbstractControl) {
+    let value = c.value.trim();
+    return value.length < 5 ? {
+      minLength: true
+    } : null;
+  }
+
+  public validatorMaxLengthFirstName(c: AbstractControl) {
+    let value = c.value.trim();
+    return value.length > 50 ? {
+      maxLength: true
+    } : null;
   }
 
 }

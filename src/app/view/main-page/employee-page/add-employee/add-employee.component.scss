@@ -16,8 +16,8 @@
   left: 0;
 
   .body {
-    width: 650px;
-    height: 450px;
+    width: 825px;
+    height: 565px;
     background-color: white;
     border-radius: 27px;
     margin-top: auto;
@@ -28,7 +28,6 @@
       width: 100%;
       height: 1px;
       margin-top: 20px;
-      margin-bottom: 20px;
     }
 
     .title {
@@ -45,26 +44,74 @@
       }
     }
 
+    .title-param {
+      width: 223px;
+      display: flex;
+      margin: 20px auto 0;
+      font-family: "Raleway", serif;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .title-param-2 {
+      margin-top: 35px;
+    }
+
     .wrap {
       display: flex;
       justify-content: space-around;
+      position: relative;
 
-      .input-data {
-        display: flex;
-        align-items: center;
-        width: 223px;
-        height: 40px;
-        border: 1px solid #e2e2e2;
-        border-radius: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 20px;
+      .success {
+        font-family: Raleway, serif;
+        color: #20e820;
+        font-size: 13px;
+        font-weight: 600;
+        margin: 0;
+        width: 100%;
+        position: absolute;
+        top: 20px;
+        left: 0;
+        text-align: center;
       }
-    }
 
-    i {
-      color: #23262e;
-      margin-left: 15px;
+      .wrap-child {
+        display: flex;
+        flex-direction: column;
+
+        .input-data-error {
+          border: 1px solid #ff7b5c !important;
+        }
+
+        .input-data {
+          display: flex;
+          align-items: center;
+          width: 223px;
+          height: 40px;
+          border: 1px solid #e2e2e2;
+          border-radius: 10px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 20px;
+          position: relative;
+
+          i {
+            color: #23262e;
+            margin-left: 15px;
+          }
+
+          .error {
+            font-family: Raleway, serif;
+            color: #ff7b5c;
+            font-size: 13px;
+            font-weight: 600;
+            margin: 0;
+            position: absolute;
+            top: 50px;
+            left: 0;
+          }
+        }
+      }
     }
 
     input {
@@ -81,43 +128,24 @@
       margin-left: 11px;
       font-weight: 500;
       font-size: 13px;
-      font-family: "Raleway";
-      padding-right: 82px;
+      width: 156px;
+      font-family: "Raleway", serif;
+    }
+
+    .disable-button {
+      background-color: #d8d8d8 !important;
     }
 
     .add {
       cursor: pointer;
-      width: 150px;
+      width: 222px;
       height: 40px;
       border-radius: 10px;
       background-color: #4290f6;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 20px;
-      margin-left: auto;
-      margin-right: auto;
-
-      p {
-        letter-spacing: 1px;
-        font-family: Raleway;
-        font-size: 15px;
-        color: #fff;
-        font-weight: 600;
-        margin: 0;
-      }
-    }
-
-    .back {
-      cursor: pointer;
-      width: 150px;
-      height: 40px;
-      border-radius: 10px;
-      background-color: #9795b4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
+      margin-top: 60px;
       margin-left: auto;
       margin-right: auto;
 
@@ -127,7 +155,38 @@
         font-size: 15px;
         color: #fff;
         font-weight: 600;
-        margin: 0;
+        margin: 0 0 0 10px;
+      }
+
+      i {
+        color: white;
+      }
+    }
+
+    .back {
+      cursor: pointer;
+      width: 222px;
+      height: 40px;
+      border-radius: 10px;
+      background-color: #d8d8d8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 60px;
+      margin-left: auto;
+      margin-right: auto;
+
+      p {
+        letter-spacing: 1px;
+        font-family: Raleway, serif;
+        font-size: 15px;
+        color: #fff;
+        font-weight: 600;
+        margin: 0 0 0 10px;
+      }
+
+      i {
+        color: white;
       }
     }
   }

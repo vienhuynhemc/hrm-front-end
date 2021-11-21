@@ -1,5 +1,5 @@
 <div class="add-employee" *ngIf="employeePageService.isAddEmployee">
-  <div class="body" [formGroup]="form">
+  <div class="body" [formGroup]="form" (keydown.enter)="addEmployee()">
     <div class="title">
       <p>Add Employee</p>
     </div>
@@ -7,65 +7,130 @@
     </div>
 
     <div class="wrap">
-      <div class="input-data">
-        <i class="fas fa-signature"></i>
-        <input type="text" placeholder="First name" formControlName="firstName">
+      <div class="wrap-child">
+        <p class="title-param">First name</p>
+        <div class="input-data" [class.input-data-error]="form.controls['firstName'].errors && enteredFirstName">
+          <i class="fas fa-signature"></i>
+          <input type="text" placeholder="First name" formControlName="firstName" id="enterFistName"
+                 (ngModelChange)="enteredFirstNameFirst()">
+          <p *ngIf="form.controls['firstName']?.errors?.required && enteredFirstName" class="error">
+            Please enter first name
+          </p>
+          <p
+            *ngIf="form.controls['firstName']?.errors?.minLength && !form.controls['firstName']?.errors?.required && enteredFirstName"
+            class="error">
+            Must be longer than 4 characters
+          </p>
+          <p *ngIf="form.controls['firstName']?.errors?.maxLength && enteredFirstName" class="error">
+            Must be shorter than 51 characters
+          </p>
+        </div>
       </div>
 
-      <div class="input-data">
-        <i class="fas fa-signature"></i>
-        <input type="text" placeholder="Last name" formControlName="lastName">
+      <div class="wrap-child">
+        <p class="title-param">Last name</p>
+        <div class="input-data" [class.input-data-error]="form.controls['lastName'].errors && enteredLastName">
+          <i class="fas fa-signature"></i>
+          <input type="text" placeholder="Last name" formControlName="lastName"
+                 (ngModelChange)="enteredLastNameFirst()">
+          <p *ngIf="form.controls['lastName'].errors && enteredLastName" class="error">
+            Please enter last name
+          </p>
+        </div>
+      </div>
+
+      <div class="wrap-child">
+        <p class="title-param">Email</p>
+        <div class="input-data"
+             [class.input-data-error]="(form.controls['email'].errors || existEmail) && enteredEmail">
+          <i class="far fa-envelope"></i>
+          <input type="text" placeholder="Email" formControlName="email" (ngModelChange)="enteredEmailFirst()">
+          <p *ngIf="form.controls['email']?.errors?.required && enteredEmail" class="error">
+            Please enter email
+          </p>
+          <p *ngIf="form.controls['email']?.errors?.email && !form.controls['email']?.errors?.required && enteredEmail"
+             class="error">
+            Email must be in the form ...@...
+          </p>
+          <p
+            *ngIf="existEmail && !form.controls['email']?.errors?.email && !form.controls['email']?.errors?.required && enteredEmail"
+            class="error">
+            Already exists
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="wrap">
+      <div class="wrap-child">
+        <p class="title-param title-param-2">Address</p>
+        <div class="input-data" [class.input-data-error]="form.controls['address'].errors && enteredAddress">
+          <i class="fas fa-map-marker-alt"></i>
+          <input type="text" placeholder="Address" formControlName="address" (ngModelChange)="enteredAddressFirst()">
+          <p *ngIf="form.controls['address'].errors && enteredAddress" class="error">
+            Please enter address
+          </p>
+        </div>
+      </div>
+
+      <div class="wrap-child">
+        <p class="title-param title-param-2">City</p>
+        <div class="input-data" [class.input-data-error]="form.controls['city'].errors && enteredCity">
+          <i class="fas fa-city"></i>
+          <input type="text" placeholder="City" formControlName="city" (ngModelChange)="enteredCityFirst()">
+          <p *ngIf="form.controls['city'].errors && enteredCity" class="error">
+            Please enter city
+          </p>
+        </div>
+      </div>
+
+      <div class="wrap-child">
+        <p class="title-param title-param-2">Gender</p>
+        <div class="input-data">
+          <i class="fas fa-transgender-alt"></i>
+          <select formControlName="gender">
+            <option *ngFor="let item of employeePageService.gender" [value]="item">{{item}}</option>
+          </select>
+        </div>
       </div>
     </div>
 
     <div class="wrap">
-      <div class="input-data">
-        <i class="far fa-envelope"></i>
-        <input type="text" placeholder="Email" formControlName="email">
+      <div class="wrap-child">
+        <p class="title-param title-param-2">Date of birth</p>
+        <div class="input-data">
+          <i class="fas fa-birthday-cake"></i>
+          <input type="datetime-local" formControlName="date"/>
+        </div>
       </div>
 
-      <div class="input-data">
-        <i class="fas fa-map-marker-alt"></i>
-        <input type="text" placeholder="Address" formControlName="address">
-      </div>
-    </div>
-
-    <div class="wrap">
-      <div class="input-data">
-        <i class="fas fa-city"></i>
-        <input type="text" placeholder="City" formControlName="city">
-      </div>
-
-      <div class="input-data">
-        <i class="fas fa-transgender-alt"></i>
-        <select formControlName="gender">
-          <option *ngFor="let item of employeePageService.gender" [value]="item">{{item}}</option>
-        </select>
+      <div class="wrap-child">
+        <p class="title-param title-param-2">Department</p>
+        <div class="input-data">
+          <i class="far fa-id-card"></i>
+          <select formControlName="id">
+            <option *ngFor="let item of ids" [value]="item.id+''">{{item.id + " - " + item.name}}</option>
+          </select>
+        </div>
       </div>
     </div>
 
     <div class="wrap">
-      <div class="input-data">
-        <i class="fas fa-birthday-cake"></i>
-        <input type="datetime-local" formControlName="date"/>
-      </div>
-
-      <div class="input-data">
-        <i class="far fa-id-card"></i>
-        <select formControlName="id" style="padding-right: 115px;">
-          <option *ngFor="let item of ids" [value]="item">{{item}}</option>
-        </select>
-      </div>
+      <p *ngIf="isShowNotification" class="success">
+        {{notificationService.titlePopUpNotificationEmployee}}
+      </p>
     </div>
 
     <div class="wrap">
-      <div class="add" (click)="addEmployee()">
+      <div class="add" (click)="addEmployee()" [class.disable-button]="!this.form.valid || existEmail"
+           [matTooltip]="!(this.form.valid||existEmail)?'Missing data':''"
+           [matTooltipClass]="!(this.form.valid||existEmail)?'tooltip':''">
+        <i class="fas fa-plus"></i>
         <p>Add</p>
       </div>
-      <div class="add" (click)="clear()">
-        <p>Clear</p>
-      </div>
       <div class="back" (click)="back()">
+        <i class="fas fa-angle-left"></i>
         <p>Back</p>
       </div>
     </div>
