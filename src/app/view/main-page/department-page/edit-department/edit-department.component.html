@@ -1,4 +1,4 @@
-<div *ngIf="departmentPageService.isEditDepartment" class="edit-department">
+<div *ngIf="departmentPageService.isEditDepartment" class="edit-department" (keydown.enter)="requestSaveDepartment()">
   <div class="body" [formGroup]="departmentPageService.form">
     <div class="title">
       <p>Edit Department #{{departmentPageService.editId}}</p>
@@ -9,7 +9,8 @@
     <div class="wrap">
       <div class="wrap-child">
         <p class="title-param">Department name</p>
-        <div class="input-data">
+        <div class="input-data"
+             [class.input-data-error]="departmentPageService.form.controls['editName'].errors && enteredName">
           <i class="fas fa-signature"></i>
           <input type="text" placeholder="Department name" formControlName="editName"
                  (ngModelChange)="enteredNameFirst()">

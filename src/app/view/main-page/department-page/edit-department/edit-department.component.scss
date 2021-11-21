@@ -65,6 +65,10 @@
         display: flex;
         flex-direction: column;
 
+        .input-data-error {
+          border: 1px solid #ff7b5c !important;
+        }
+
         .input-data {
           display: flex;
           align-items: center;
@@ -115,7 +119,7 @@
     }
 
     .disable-button {
-      background: #d8d8d8;
+      background-color: #d8d8d8 !important;
     }
 
     .add {

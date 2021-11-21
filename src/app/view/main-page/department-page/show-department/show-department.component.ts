@@ -88,7 +88,6 @@ export class ShowDepartmentComponent implements OnInit {
       this.departmentPageService.isProcessRemove = false;
       this.notificationService.addNotification(`You have successfully deleted the department #${this.departmentPageService.idDepartmentNeedRemove}!`)
     });
-    this.departmentPageService.loadData(0);
   }
 
 }

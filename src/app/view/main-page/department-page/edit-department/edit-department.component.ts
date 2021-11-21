@@ -31,10 +31,12 @@ export class EditDepartmentComponent implements OnInit {
   }
 
   public requestSaveDepartment() {
-    this.notificationService.titlePopUpYesNoDepartment = "Update department";
-    this.notificationService.childPopUpYesNoDepartment = `Are you sure you want to update department
+    if (this.departmentPageService.form.valid) {
+      this.notificationService.titlePopUpYesNoDepartment = "Update department";
+      this.notificationService.childPopUpYesNoDepartment = `Are you sure you want to update department
     #${this.departmentPageService.editId}?`
-    this.departmentPageService.isShowPopupRequest = true;
+      this.departmentPageService.isShowPopupRequest = true;
+    }
   }
 
 }
