@@ -69,13 +69,15 @@
       <p class="title1">{{notificationService.titlePopUpYesNoEmployee}}</p>
       <p class="title2">{{notificationService.childPopUpYesNoEmployee}}</p>
       <div>
-        <p *ngIf="employeePageService.isProcessRemove" (click)="removeItem()">Yes , sure<i
-          class="fa fa-check"></i></p>
-        <p *ngIf="!employeePageService.isProcessRemove" (click)="employeePageService.saveItem()">Yes , sure<i
-          class="fa fa-check"></i></p>
-        <span (click)="hiddenPopup()">No, think more <i class="fas fa-times"></i></span>
+        <p *ngIf="employeePageService.isProcessRemove" (click)="removeItem()"><i
+          class="fa fa-check"></i>Yes , sure</p>
+        <p *ngIf="!employeePageService.isProcessRemove" (click)="employeePageService.saveItem()"><i
+          class="fa fa-check"></i>Yes , sure</p>
+        <span (click)="hiddenPopup()"><i class="fas fa-times"></i>No, think more </span>
       </div>
     </div>
   </div>
 </div>
 
+
+<app-toast></app-toast>

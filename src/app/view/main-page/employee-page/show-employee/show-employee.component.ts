@@ -84,8 +84,7 @@ export class ShowEmployeeComponent implements OnInit {
       this.employeePageService.loadData(0);
       this.employeePageService.isShowPopupRequest = false;
       this.employeePageService.isProcessRemove = false;
-      this.employeePageService.isShowNotification = true;
-      this.notificationService.titlePopUpNotificationEmployee = `You have successfully deleted the employee #${this.employeePageService.idEmployeeNeedRemove}!`;
+      this.notificationService.addNotification(`You have successfully deleted the employee #${this.employeePageService.idEmployeeNeedRemove}!`);
     });
   }
 

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {NotificationService} from "../../../service/notification/notification.service";
 
 @Component({
   selector: 'app-employee-page',
@@ -7,10 +8,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class EmployeePageComponent implements OnInit {
 
-  constructor() {
+  constructor(
+    public notificationService: NotificationService
+  ) {
   }
 
   ngOnInit(): void {
+    this.notificationService.notifications = [];
   }
 
 }

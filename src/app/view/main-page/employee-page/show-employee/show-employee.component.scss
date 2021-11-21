@@ -388,30 +388,29 @@
         display: flex;
 
         p {
-          margin: 0;
           display: flex;
           justify-content: center;
           align-items: center;
           color: white;
-          background-color: rgb(216 216 216);
+          background-color: rgb(65, 98, 251);
           border: none;
           border-radius: 3px;
           width: 200px;
           height: 40px;
-          margin-top: 30px;
           font-size: 14px;
           font-family: sans-serif;
-          margin-right: 10px;
+          margin: 30px 0 0 10px;
           cursor: pointer;
 
           i {
-            margin-left: 5px;
+            color: white;
+            margin-right: 10px;
           }
         }
 
         span {
           color: white;
-          background-color: rgb(65, 98, 251);
+          background-color: rgb(216 216 216);
           border: none;
           border-radius: 3px;
           width: 200px;
@@ -426,8 +425,8 @@
           cursor: pointer;
 
           i {
+            margin-right: 10px;
             color: white;
-            margin-left: 5px;
           }
         }
       }
@@ -464,23 +463,21 @@
     }
 
     .title {
-      margin: 0;
       color: #23262e;
       font-family: "Raleway", serif;
       line-height: 21px;
       letter-spacing: 1px;
       font-weight: 700;
       font-size: 20px;
-      margin-top: 20px;
+      margin: 20px 0 0;
     }
 
     .child {
-      margin: 0;
       letter-spacing: 1px;
       font-size: 12px;
       font-weight: 500;
       color: #888888;
-      margin-top: 15px;
+      margin: 15px 0 0;
       font-family: "Raleway", serif;
       text-align: center;
     }
@@ -499,12 +496,11 @@
       padding: 12px 24px;
 
       p {
-        margin: 0;
         font-family: "Raleway", serif;
         font-size: 13px;
         font-weight: 600;
         letter-spacing: 1px;
-        margin-left: 10px;
+        margin: 0 10px 0 0;
         color: white;
       }
 
