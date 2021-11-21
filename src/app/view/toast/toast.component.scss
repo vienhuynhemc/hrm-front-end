@@ -1,0 +1,28 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.toast {
+  position: fixed;
+  right: 20px;
+  top: 0;
+
+  div{
+    transition: all 1s ease;
+    margin-top: 20px;
+    box-shadow: 11px 15px 14px -7px #67666c;
+    background: white;
+    border-radius: 15px;
+    padding: 17px 20px;
+
+    p {
+      color: #20e820;
+      font-size: 14px;
+      margin: 0;
+      font-family: "Raleway", sans-serif;
+      font-weight: 500;
+    }
+  }
+}

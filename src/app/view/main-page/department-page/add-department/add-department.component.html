@@ -1,27 +1,34 @@
-<div class="add-department" [formGroup]="form">
+<div class="add-department" [formGroup]="form" (keyup.enter)="addDepartment()">
   <div class="title">
     <p>Add Department</p>
   </div>
   <div class="line">
   </div>
 
-  <div class="input-data">
+  <p class="title-param">Department name</p>
+  <div class="input-data" [class.input-data-error]="form.controls['name'].errors && enteredName">
     <i class="fas fa-signature"></i>
-    <input type="text" placeholder="Department name" formControlName="name">
+    <input type="text" placeholder="Department name" formControlName="name" (ngModelChange)="enteredNameFirst()">
+    <p *ngIf="form.controls['name'].errors && enteredName" class="error">
+      Please enter department name
+    </p>
   </div>
 
+  <p class="title-param title-param-2">Location</p>
   <div class="input-data">
     <i class="fas fa-map-marker-alt"></i>
     <select formControlName="location">
       <option *ngFor="let item of departmentPageService.locations" [value]="item">{{item}}</option>
     </select>
+    <p *ngIf="isShowNotification" class="success">
+      {{notificationService.titlePopUpNotificationDepartment}}
+    </p>
   </div>
 
-  <div class="add" (click)="addDepartment()">
+  <div class="add" (click)="addDepartment()" [class.disable-button]="!this.form.valid"
+       [matTooltip]="!this.form.valid?'Missing data':''" [matTooltipClass]="!this.form.valid?'tooltip':''">
+    <i class="fas fa-plus"></i>
     <p>Add</p>
   </div>
 
-  <div class="add" (click)="clear()">
-    <p>Clear</p>
-  </div>
 </div>

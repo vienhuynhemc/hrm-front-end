@@ -32,17 +32,16 @@ export class DepartmentPageService {
 
   public idDepartmentNeedRemove: number = 0;
   public isShowPopupRequest: boolean = false;
-  public isShowNotification: boolean = false;
   public isProcessRemove: boolean = false;
-  public form:FormGroup = this.formBuilder.group(
+  public form: FormGroup = this.formBuilder.group(
     {
-      editName:['',[Validators.required]],
-      editLocation:[''],
+      editName: ['', [Validators.required]],
+      editLocation: [''],
     }
   )
 
   constructor(
-    private formBuilder:FormBuilder,
+    private formBuilder: FormBuilder,
     private httpClient: HttpClient,
     private notificationService: NotificationService
   ) {
@@ -114,9 +113,7 @@ export class DepartmentPageService {
         this.isEditDepartment = false;
         this.loadData(0);
         this.isShowPopupRequest = false;
-        this.isShowNotification = true;
-        this.notificationService.titlePopUpNotificationDepartment = "Success";
-        this.notificationService.childPopUpNotificationDepartment = `You have successfully updated the department #${this.editId}`;
+        this.notificationService.addNotification(`You have successfully updated the department #${this.editId}!`)
       })
     }
   }

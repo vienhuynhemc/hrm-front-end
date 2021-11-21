@@ -68,7 +68,7 @@ export class ShowEmployeeComponent implements OnInit {
     this.employeePageService.idEmployeeNeedRemove = id;
     this.notificationService.titlePopUpYesNoEmployee = "Delete employee";
     this.notificationService.childPopUpYesNoEmployee = `Are you sure you want to delete employee
-    #${this.employeePageService.idEmployeeNeedRemove}`
+    #${this.employeePageService.idEmployeeNeedRemove}?`
     this.employeePageService.isShowPopupRequest = true;
     this.employeePageService.isProcessRemove = true;
   }
@@ -85,8 +85,7 @@ export class ShowEmployeeComponent implements OnInit {
       this.employeePageService.isShowPopupRequest = false;
       this.employeePageService.isProcessRemove = false;
       this.employeePageService.isShowNotification = true;
-      this.notificationService.titlePopUpNotificationEmployee = "Success";
-      this.notificationService.childPopUpNotificationEmployee = `You have successfully deleted the employee #${this.employeePageService.idEmployeeNeedRemove}`;
+      this.notificationService.titlePopUpNotificationEmployee = `You have successfully deleted the employee #${this.employeePageService.idEmployeeNeedRemove}!`;
     });
   }
 

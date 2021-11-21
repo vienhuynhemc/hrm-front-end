@@ -23,6 +23,7 @@ import {EditDepartmentComponent} from './view/main-page/department-page/edit-dep
 import {AddEmployeeComponent} from './view/main-page/employee-page/add-employee/add-employee.component';
 import {ShowEmployeeComponent} from './view/main-page/employee-page/show-employee/show-employee.component';
 import {EditEmployeeComponent} from './view/main-page/employee-page/edit-employee/edit-employee.component';
+import { ToastComponent } from './view/toast/toast.component';
 
 export function playerFactory() {
   return player;
@@ -40,7 +41,8 @@ export function playerFactory() {
     EditDepartmentComponent,
     AddEmployeeComponent,
     ShowEmployeeComponent,
-    EditEmployeeComponent
+    EditEmployeeComponent,
+    ToastComponent
   ],
   imports: [
     FormsModule,

@@ -35,7 +35,7 @@ export class EmployeePageService {
   public form: FormGroup = this.formBuilder.group(
     {
       editGender: ['',],
-      editFirstName: ['', [Validators.required]],
+      editFirstName: ['', [Validators.required, Validators.min(5), Validators.max(50)]],
       editLastName: ['', [Validators.required]],
       editAddress: ['', [Validators.required]],
       editCity: ['', [Validators.required]],
@@ -50,7 +50,7 @@ export class EmployeePageService {
   public isShowNotification: boolean = false;
   public isProcessRemove: boolean = false;
 
-  public isAddEmployee:boolean =false;
+  public isAddEmployee: boolean = false;
 
   constructor(
     private httpClient: HttpClient,
@@ -156,11 +156,9 @@ export class EmployeePageService {
         this.isShowPopupRequest = false;
         this.isShowNotification = true;
         if (data.message == "Exists email") {
-          this.notificationService.titlePopUpNotificationEmployee = "Failure";
-          this.notificationService.childPopUpNotificationEmployee = `Already exists staff with email: ${this.form.value.editEmail}`;
+          this.notificationService.titlePopUpNotificationEmployee = `Already exists staff with email: ${this.form.value.editEmail}`;
         } else {
-          this.notificationService.titlePopUpNotificationEmployee = "Success";
-          this.notificationService.childPopUpNotificationEmployee = `You have successfully updated the employee #${this.editId}`;
+          this.notificationService.titlePopUpNotificationEmployee =  `You have successfully updated the employee #${this.editId}`;
           this.isEditEmployee = false;
           this.loadData(0);
         }

@@ -17,6 +17,10 @@ export class AddDepartmentComponent implements OnInit {
     }
   );
 
+  public isShowNotification: boolean = false;
+
+  public enteredName: boolean = false;
+
   constructor(
     public departmentPageService: DepartmentPageService,
     public notificationService: NotificationService,
@@ -24,25 +28,30 @@ export class AddDepartmentComponent implements OnInit {
   ) {
   }
 
-  public addDepartment(): void {
-    if (this.form.valid) {
-      this.departmentPageService.addNewDepartment(this.form.value).subscribe(data => {
-        console.log(data);
-        this.departmentPageService.loadData(0);
-        this.departmentPageService.isShowNotification = true;
-        this.notificationService.titlePopUpNotificationDepartment = "Success";
-        this.notificationService.childPopUpNotificationDepartment = `You have successfully added the department #${data.data.id}`;
-      });
+  public enteredNameFirst(): void {
+    if (!this.enteredName) {
+      this.enteredName = true;
     }
   }
 
-  ngOnInit(): void {
+  public addDepartment(): void {
+    this.enteredNameFirst();
+    if (this.form.valid) {
+      this.departmentPageService.addNewDepartment(this.form.value).subscribe(data => {
+        console.log(data);
+        this.form.patchValue({
+          name: "",
+        });
+        this.enteredName = false;
+        this.departmentPageService.loadData(0);
+        this.isShowNotification = true;
+        this.notificationService.titlePopUpNotificationDepartment = `You have successfully added the department #${data.data.id}!`;
+      });
+    }
+
   }
 
-  public clear():void{
-    this.form.patchValue({
-      name: "",
-    });
+  ngOnInit(): void {
   }
 
 }

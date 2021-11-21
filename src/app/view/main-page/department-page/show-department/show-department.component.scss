@@ -28,7 +28,7 @@
         margin-left: 20px;
         font-weight: bold;
         font-size: 13px;
-        font-family: "Raleway";
+        font-family: "Raleway", serif;
         padding-right: 16px;
       }
 
@@ -75,7 +75,7 @@
           border: none;
           margin-left: 10px;
           width: 144px;
-          font-family: "Raleway";
+          font-family: "Raleway", serif;
           margin-right: 12px;
         }
       }
@@ -87,9 +87,10 @@
       margin-left: auto;
       margin-right: auto;
       height: 44px;
+
       p {
         margin: 0;
-        font-family: "Raleway";
+        font-family: "Raleway", serif;
         font-size: 14px;
         font-weight: 500;
         color: #b8b8c8;
@@ -99,6 +100,7 @@
 
   .content {
     margin-top: 20px;
+
     .header {
       p {
         color: #78909c;
@@ -106,24 +108,24 @@
         font-size: 14px;
         font-weight: bold;
       }
+
       :nth-child(1) {
-        margin: 0;
-        margin-left: 80px;
+        margin: 0 0 0 80px;
       }
+
       :nth-child(2) {
-        margin: 0;
-        margin-left: 60px;
+        margin: 0 0 0 60px;
       }
+
       :nth-child(3) {
-        margin: 0;
-        margin-left: 150px;
+        margin: 0 0 0 150px;
       }
 
       :nth-child(4) {
-        margin: 0;
-        margin-left: 94px;
+        margin: 0 0 0 94px;
       }
     }
+
     .list {
       margin-top: 10px;
       height: 665px;
@@ -142,6 +144,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
+
           .anim {
             width: 100px;
           }
@@ -159,9 +162,9 @@
           margin-right: 9px;
 
           p {
-            margin: 0px;
+            margin: 0;
             color: #5e6467;
-            font-family: "Raleway";
+            font-family: "Raleway", serif;
             font-size: 13px;
             font-weight: 500;
             overflow-wrap: break-word;
@@ -213,26 +216,30 @@
     }
   }
 }
+
 ::-webkit-scrollbar-track {
   border-radius: 20px;
   background: #00000000;
 }
+
 ::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background: #00000066;
 }
+
 ::-webkit-scrollbar {
   width: 7px;
   border-radius: 10px;
 }
+
 ::-webkit-scrollbar:hover {
   background: #0700001c !important;
 }
 
 .formYesNo {
   position: fixed;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   z-index: 999;
@@ -243,7 +250,7 @@
     height: 100%;
     position: absolute;
     background-color: #e8a2a224;
-    top: 0px;
+    top: 0;
     z-index: 2;
   }
 
@@ -261,13 +268,12 @@
     box-shadow: 17px 20px 14px 4px #67666c;
 
     .title {
-      margin: 0px;
       text-align: center;
       font-family: sans-serif;
       color: rgb(65, 98, 251);
       font-weight: bold;
       font-size: 22px;
-      margin-top: 50px;
+      margin: 50px 0 0;
 
       i {
         color: rgb(65, 98, 251);
@@ -281,7 +287,7 @@
       margin-top: 50px;
 
       .title1 {
-        margin: 0px;
+        margin: 0;
         color: #36363f;
         font-weight: bold;
         font-size: 18px;
@@ -289,42 +295,40 @@
       }
 
       .title2 {
-        margin: 0px;
         color: #5e6477;
         font-size: 14px;
         text-align: center;
         width: 350px;
-        margin-top: 35px;
+        margin: 35px 0 0;
         font-family: sans-serif;
       }
 
       div {
         display: flex;
+
         p {
-          margin: 0px;
           display: flex;
           justify-content: center;
           align-items: center;
           color: white;
-          background-color: rgb(216 216 216);
           border: none;
           border-radius: 3px;
           width: 200px;
           height: 40px;
-          margin-top: 30px;
           font-size: 14px;
           font-family: sans-serif;
-          justify-content: center;
-          align-items: center;
-          margin-right: 10px;
+          margin: 30px 10px 0 0;
           cursor: pointer;
+          background-color: rgb(65, 98, 251);
+
           i {
-            margin-left: 5px;
+            margin-right: 10px;
           }
         }
+
         span {
+          background-color: rgb(216 216 216);
           color: white;
-          background-color: rgb(65, 98, 251);
           border: none;
           border-radius: 3px;
           width: 200px;
@@ -337,9 +341,10 @@
           align-items: center;
           margin-left: 10px;
           cursor: pointer;
+
           i {
             color: white;
-            margin-left: 5px;
+            margin-right: 10px;
           }
         }
       }
@@ -356,8 +361,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
 
   .content {
     width: 600px;
@@ -368,6 +373,7 @@
     align-items: center;
     border-radius: 10px;
     box-shadow: 0 0 15px 2px #a7575782;
+
     .anim {
       width: 285px;
       margin-top: 10px;
@@ -375,24 +381,22 @@
     }
 
     .title {
-      margin: 0px;
       color: #23262e;
-      font-family: "Raleway";
+      font-family: "Raleway", serif;
       line-height: 21px;
       letter-spacing: 1px;
       font-weight: 700;
       font-size: 20px;
-      margin-top: 20px;
+      margin: 20px 0 0;
     }
 
     .child {
-      margin: 0px;
       letter-spacing: 1px;
       font-size: 12px;
       font-weight: 500;
       color: #888888;
-      margin-top: 15px;
-      font-family: "Raleway";
+      margin: 15px 0 0;
+      font-family: "Raleway", serif;
       text-align: center;
     }
 
@@ -410,12 +414,11 @@
       padding: 12px 24px;
 
       p {
-        margin: 0px;
-        font-family: "Raleway";
+        font-family: "Raleway", serif;
         font-size: 13px;
         font-weight: 600;
         letter-spacing: 1px;
-        margin-left: 10px;
+        margin: 0 0 0 10px;
         color: white;
       }
 

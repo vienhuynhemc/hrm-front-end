@@ -1,6 +1,6 @@
-import { NotificationService } from '../../../../service/notification/notification.service';
-import { DepartmentPageService } from '../../../../service/main-page/department-page/department-page.service';
-import { Component, OnInit } from '@angular/core';
+import {NotificationService} from '../../../../service/notification/notification.service';
+import {DepartmentPageService} from '../../../../service/main-page/department-page/department-page.service';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-edit-department',
@@ -9,12 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditDepartmentComponent implements OnInit {
 
+  public enteredName: boolean = false;
+
   constructor(
     public departmentPageService: DepartmentPageService,
     public notificationService: NotificationService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
+  }
+
+  public enteredNameFirst() {
+    if (!this.enteredName) {
+      this.enteredName = true;
+    }
   }
 
   public back(): void {
@@ -24,7 +33,7 @@ export class EditDepartmentComponent implements OnInit {
   public requestSaveDepartment() {
     this.notificationService.titlePopUpYesNoDepartment = "Update department";
     this.notificationService.childPopUpYesNoDepartment = `Are you sure you want to update department
-    #${this.departmentPageService.editId}`
+    #${this.departmentPageService.editId}?`
     this.departmentPageService.isShowPopupRequest = true;
   }
 

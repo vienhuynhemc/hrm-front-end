@@ -15,7 +15,7 @@ export class AddEmployeeComponent implements OnInit {
   public form: FormGroup = this.formBuilder.group(
     {
       gender: ['MALE',],
-      firstName: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.min(5), Validators.max(50)]],
       lastName: ['', [Validators.required]],
       address: ['', [Validators.required]],
       city: ['', [Validators.required]],
@@ -61,11 +61,9 @@ export class AddEmployeeComponent implements OnInit {
         console.log(data);
         this.employeePageService.isShowNotification = true;
         if (data.status == "500 INTERNAL_SERVER_ERROR") {
-          this.notificationService.titlePopUpNotificationEmployee = "Failure";
-          this.notificationService.childPopUpNotificationEmployee = `Already exists staff with email: ${this.form.value.email}`;
+          this.notificationService.titlePopUpNotificationEmployee = `Already exists staff with email: ${this.form.value.email}`;
         } else {
-          this.notificationService.titlePopUpNotificationEmployee = "Success";
-          this.notificationService.childPopUpNotificationEmployee = `You have successfully added the employee #${data.data.id}`;
+          this.notificationService.titlePopUpNotificationEmployee = `You have successfully added the employee #${data.data.id}`;
           this.employeePageService.loadData(0);
         }
       });
@@ -73,7 +71,7 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   public back(): void {
-    this.employeePageService.isAddEmployee= false;
+    this.employeePageService.isAddEmployee = false;
   }
 
   public clear(): void {

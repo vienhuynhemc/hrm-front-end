@@ -41,8 +41,8 @@ export class ShowDepartmentComponent implements OnInit {
   public editItem(item: Department) {
     this.departmentPageService.isEditDepartment = true;
     this.departmentPageService.form.patchValue({
-      editName:item.name,
-      editLocation:item.location,
+      editName: item.name,
+      editLocation: item.location,
     });
     this.departmentPageService.editId = item.id!;
   }
@@ -70,7 +70,7 @@ export class ShowDepartmentComponent implements OnInit {
     this.departmentPageService.idDepartmentNeedRemove = id;
     this.notificationService.titlePopUpYesNoDepartment = "Delete department";
     this.notificationService.childPopUpYesNoDepartment = `Are you sure you want to delete department
-    #${this.departmentPageService.idDepartmentNeedRemove}`
+    #${this.departmentPageService.idDepartmentNeedRemove}?`
     this.departmentPageService.isShowPopupRequest = true;
     this.departmentPageService.isProcessRemove = true;
   }
@@ -86,15 +86,9 @@ export class ShowDepartmentComponent implements OnInit {
       this.departmentPageService.loadData(0);
       this.departmentPageService.isShowPopupRequest = false;
       this.departmentPageService.isProcessRemove = false;
-      this.departmentPageService.isShowNotification = true;
-      this.notificationService.titlePopUpNotificationDepartment = "Success";
-      this.notificationService.childPopUpNotificationDepartment = `You have successfully deleted the department #${this.departmentPageService.idDepartmentNeedRemove}`;
+      this.notificationService.addNotification(`You have successfully deleted the department #${this.departmentPageService.idDepartmentNeedRemove}!`)
     });
     this.departmentPageService.loadData(0);
-  }
-
-  public hiddenNotification(): void {
-    this.departmentPageService.isShowNotification = false;
   }
 
 }

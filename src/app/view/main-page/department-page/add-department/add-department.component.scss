@@ -30,9 +30,26 @@
     p {
       font-weight: 700;
       font-size: 16px;
-      font-family: "Raleway";
+      font-family: "Raleway", serif;
       margin: 0;
     }
+  }
+
+  .title-param {
+    width: 223px;
+    display: flex;
+    margin: 20px auto 0;
+    font-family: "Raleway", serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .title-param-2 {
+    margin-top: 35px;
+  }
+
+  .input-data-error {
+    border: 1px solid #ff7b5c !important;
   }
 
   .input-data {
@@ -44,13 +61,37 @@
     border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
+    position: relative;
     margin-top: 20px;
+
+    i {
+      color: #23262e;
+      margin-left: 15px;
+    }
+
+    .error {
+      font-family: Raleway, serif;
+      color: #ff7b5c;
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0;
+      position: absolute;
+      top: 50px;
+      left: 0;
+    }
+
+    .success {
+      font-family: Raleway, serif;
+      color: #20e820;
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0;
+      position: absolute;
+      top: 50px;
+      left: 0;
+    }
   }
 
-  i {
-    color: #23262e;
-    margin-left: 15px;
-  }
 
   input {
     width: 144px;
@@ -66,7 +107,7 @@
     margin-left: 11px;
     font-weight: 500;
     font-size: 13px;
-    font-family: "Raleway";
+    font-family: "Raleway", serif;
     padding-right: 52px;
   }
 
@@ -79,18 +120,26 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 60px;
+
+    i {
+      color: white;
+    }
 
     p {
       letter-spacing: 1px;
-      font-family: Raleway;
+      font-family: Raleway, serif;
       font-size: 15px;
       color: #fff;
       font-weight: 600;
-      margin: 0;
+      margin: 0 0 0 10px;
     }
+  }
+
+  .disable-button {
+    background-color: #d8d8d8 !important;
   }
 
   .back {
@@ -108,7 +157,7 @@
 
     p {
       letter-spacing: 1px;
-      font-family: Raleway;
+      font-family: Raleway, serif;
       font-size: 15px;
       color: #fff;
       font-weight: 600;

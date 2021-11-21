@@ -64,7 +64,7 @@
 <div class="formYesNo" *ngIf="employeePageService.isShowPopupRequest">
   <div class="formYesNoHidden"></div>
   <div class="content">
-    <p class="title"><i class="fa fa-cogs"></i> HCR </p>
+    <p class="title"><i class="fa fa-cogs"></i> HRM </p>
     <div class="select">
       <p class="title1">{{notificationService.titlePopUpYesNoEmployee}}</p>
       <p class="title2">{{notificationService.childPopUpYesNoEmployee}}</p>
@@ -79,14 +79,3 @@
   </div>
 </div>
 
-<div class="notification" *ngIf="employeePageService.isShowNotification">
-  <div class="content">
-    <main lottie [options]="notificationService.options" class="anim"></main>
-    <p class="title">{{notificationService.titlePopUpNotificationEmployee}}</p>
-    <p class="child">{{notificationService.childPopUpNotificationEmployee}}</p>
-    <button class="confirm" (click)="hiddenNotification()">
-      <i class="fab fa-battle-net"></i>
-      <p>Oke</p>
-    </button>
-  </div>
-</div>

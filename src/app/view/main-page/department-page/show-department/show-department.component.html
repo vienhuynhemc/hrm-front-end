@@ -1,80 +1,71 @@
 <div class="show-department">
+  <div class="header">
+    <div class="fillter">
+      <select [(ngModel)]="departmentPageService.mainAttribute">
+        <option *ngFor="let item of departmentPageService.mainAttributes" [value]="item">{{item}}</option>
+      </select>
+      <div class="sort" [style.marginTop]="departmentPageService.sortString == 'ASC'?'-5px':'0px'">
+        <i *ngIf=" departmentPageService.sortString=='ASC'" class=" fas fa-sort-amount-down asc"
+           (click)="changeSort('DESC')" matTooltip="Sort by DESC" matTooltipClass="tooltip"></i>
+        <i *ngIf="departmentPageService.sortString == 'DESC'" class="fas fa-sort-amount-down-alt desc"
+           (click)="changeSort('ASC')" matTooltip="Sort by ASC" matTooltipClass="tooltip"></i>
+      </div>
+      <div class="search">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search..." [(ngModel)]="departmentPageService.inputSearch"
+               (ngModelChange)="changeSearch()">
+      </div>
+      <div class="show-found">
+        <p>Show {{departmentPageService.departments.length}} lines</p>
+      </div>
+    </div>
+  </div>
+  <div class="content">
     <div class="header">
-        <div class="fillter">
-            <select [(ngModel)]="departmentPageService.mainAttribute">
-                <option *ngFor="let item of departmentPageService.mainAttributes" [value]="item">{{item}}</option>
-            </select>
-            <div class="sort" [style.marginTop]="departmentPageService.sortString == 'ASC'?'-5px':'0px'">
-                <i *ngIf=" departmentPageService.sortString=='ASC'" class=" fas fa-sort-amount-down asc"
-                    (click)="changeSort('DESC')" matTooltip="Sort by DESC" matTooltipClass="tooltip"></i>
-                <i *ngIf="departmentPageService.sortString == 'DESC'" class="fas fa-sort-amount-down-alt desc"
-                    (click)="changeSort('ASC')" matTooltip="Sort by ASC" matTooltipClass="tooltip"></i>
-            </div>
-            <div class="search">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search..." [(ngModel)]="departmentPageService.inputSearch"
-                    (ngModelChange)="changeSearch()">
-            </div>
-            <div class="show-found">
-                <p>Show {{departmentPageService.departments.length}} lines</p>
-            </div>
-        </div>
+      <p>Id</p>
+      <p>Name</p>
+      <p>Location</p>
+      <p>Number of employees</p>
     </div>
-    <div class="content">
-        <div class="header">
-            <p>Id</p>
-            <p>Name</p>
-            <p>Location</p>
-            <p>Number of employees</p>
-        </div>
-        <div class="list">
-            <div id="content-list" class="content-list" (scroll)="onScroll()">
-                <div class="line" *ngFor="let item of departmentPageService.departments">
-                    <p>{{item.id}}</p>
-                    <p>{{item.name}}</p>
-                    <p>{{item.location}}</p>
-                    <p>{{item.member}}</p>
-                    <i *ngIf="item.member == 0" (click)="requestRemoveItem(item.id!)" class="far fa-trash-alt"
-                        matTooltip="Delete" matTooltipClass="tooltip"></i>
-                    <i *ngIf="item.member != 0" class="far fa-trash-alt can-not-remove" matTooltip="
+    <div class="list">
+      <div id="content-list" class="content-list" (scroll)="onScroll()">
+        <div class="line" *ngFor="let item of departmentPageService.departments">
+          <p>{{item.id}}</p>
+          <p>{{item.name}}</p>
+          <p>{{item.location}}</p>
+          <p>{{item.member}}</p>
+          <i *ngIf="item.member == 0" (click)="requestRemoveItem(item.id!)" class="far fa-trash-alt"
+             matTooltip="Delete" matTooltipClass="tooltip"></i>
+          <i *ngIf="item.member != 0" class="far fa-trash-alt can-not-remove" matTooltip="
                     Can't delete because have employees" matTooltipClass="tooltip"></i>
-                    <i (click)="editItem(item)" class="fas fa-pencil-alt" matTooltip="Edit"
-                        matTooltipClass="tooltip"></i>
-                </div>
-                <div class="content-anim" *ngIf="departmentPageService.isLoadData">
-                    <main lottie [options]="options" class="anim"></main>
-                </div>
-            </div>
+          <i (click)="editItem(item)" class="fas fa-pencil-alt" matTooltip="Edit"
+             matTooltipClass="tooltip"></i>
         </div>
+        <div class="content-anim" *ngIf="departmentPageService.isLoadData">
+          <main lottie [options]="options" class="anim"></main>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="formYesNo" *ngIf="departmentPageService.isShowPopupRequest">
-    <div class="formYesNoHidden"></div>
-    <div class="content">
-        <p class="title"><i class="fa fa-cogs"></i> HCR </p>
-        <div class="select">
-            <p class="title1">{{notificationService.titlePopUpYesNoDepartment}}</p>
-            <p class="title2">{{notificationService.childPopUpYesNoDepartment}}</p>
-            <div>
-                <p *ngIf="departmentPageService.isProcessRemove" (click)="removeItem()">Yes , sure<i
-                        class="fa fa-check"></i></p>
-                <p *ngIf="!departmentPageService.isProcessRemove" (click)="departmentPageService.saveItem()">Yes ,
-                    sure<i class="fa fa-check"></i></p>
-                <span (click)="hiddenPopup()">No, think more <i class="fas fa-times"></i></span>
-            </div>
-        </div>
+  <div class="formYesNoHidden"></div>
+  <div class="content">
+    <p class="title"><i class="fa fa-cogs"></i> HRM </p>
+    <div class="select">
+      <p class="title1">{{notificationService.titlePopUpYesNoDepartment}}</p>
+      <p class="title2">{{notificationService.childPopUpYesNoDepartment}}</p>
+      <div>
+        <p *ngIf="departmentPageService.isProcessRemove" (click)="removeItem()"><i
+          class="fa fa-check"></i>Yes , sure</p>
+        <p *ngIf="!departmentPageService.isProcessRemove" (click)="departmentPageService.saveItem()"><i
+          class="fa fa-check"></i>Yes ,
+          sure</p>
+        <span (click)="hiddenPopup()"><i class="fas fa-times"></i>No, think more </span>
+      </div>
     </div>
+  </div>
 </div>
 
-<div class="notification" *ngIf="departmentPageService.isShowNotification">
-    <div class="content">
-        <main lottie [options]="notificationService.options" class="anim"></main>
-        <p class="title">{{notificationService.titlePopUpNotificationDepartment}}</p>
-        <p class="child">{{notificationService.childPopUpNotificationDepartment}}</p>
-        <button class="confirm" (click)="hiddenNotification()">
-            <i class="fab fa-battle-net"></i>
-            <p>Oke</p>
-        </button>
-    </div>
-</div>
+<app-toast></app-toast>
