@@ -48,7 +48,7 @@ export class AddEmployeeComponent implements OnInit {
           id: data.data[i].id,
           name: data.data[i].name,
           member: 0,
-          location: data.data[i].id.location,
+          location: data.data[i].location,
         });
       }
       this.form.patchValue(

@@ -110,7 +110,7 @@
         <div class="input-data">
           <i class="far fa-id-card"></i>
           <select formControlName="id">
-            <option *ngFor="let item of ids" [value]="item.id+''">{{item.id + " - " + item.name}}</option>
+            <option *ngFor="let item of ids" [value]="item.id+''">{{item.id + " - " + item.name +" - "+item.location}}</option>
           </select>
         </div>
       </div>

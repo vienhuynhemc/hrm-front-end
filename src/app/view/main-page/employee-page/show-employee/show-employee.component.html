@@ -34,7 +34,7 @@
       <p>Email</p>
       <p>Address</p>
       <p>City</p>
-      <p>Department Id</p>
+      <p>Department</p>
     </div>
     <div class="list">
       <div id="content-list-e" class="content-list" (scroll)="onScroll()">
@@ -47,7 +47,7 @@
           <p>{{item.email}}</p>
           <p>{{item.address}}</p>
           <p>{{item.city}}</p>
-          <p>{{item.department!.id}}</p>
+          <p>{{item.department!.id + " - " + item.department.name + " - " + item.department.location}}</p>
           <i (click)="requestRemoveItem(item.id!)" class="far fa-trash-alt" matTooltip="Delete"
              matTooltipClass="tooltip"></i>
           <i (click)="editItem(item)" class="fas fa-pencil-alt" matTooltip="Edit"
