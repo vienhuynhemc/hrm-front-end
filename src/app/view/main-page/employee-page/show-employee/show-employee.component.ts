@@ -41,10 +41,6 @@ export class ShowEmployeeComponent implements OnInit {
     this.employeePageService.loadData(0);
   }
 
-  public hiddenNotification(): void {
-    this.employeePageService.isShowNotification = false;
-  }
-
   @HostListener('scroll', ['$event']) // for scroll events of the current element
   onScroll() {
     let scrollTop = document.getElementById("content-list-e")!.scrollTop;

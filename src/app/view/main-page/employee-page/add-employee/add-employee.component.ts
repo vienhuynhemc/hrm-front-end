@@ -129,7 +129,6 @@ export class AddEmployeeComponent implements OnInit {
       };
       this.employeePageService.addNewEmployee(body).subscribe(data => {
         console.log(data);
-        this.employeePageService.isShowNotification = true;
         this.form.patchValue(
           {
             firstName: "",

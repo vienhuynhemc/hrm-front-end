@@ -1,71 +1,130 @@
 <div *ngIf="employeePageService.isEditEmployee" class="edit-employee">
-  <div class="body" [formGroup]="employeePageService.form">
-
+  <div class="body" [formGroup]="employeePageService.form" (keydown.enter)="requestSaveEmployee()">
     <div class="title">
       <p>Edit Employee #{{employeePageService.editId}}</p>
     </div>
     <div class="line">
     </div>
-
     <div class="wrap">
-      <div class="input-data">
-        <i class="fas fa-signature"></i>
-        <input type="text" placeholder="First name" formControlName="editFirstName">
+      <div class="wrap-child">
+        <p class="title-param">First name</p>
+        <div class="input-data" [class.input-data-error]="employeePageService.form.controls['editFirstName'].errors && enteredFirstName">
+          <i class="fas fa-signature"></i>
+          <input type="text" placeholder="First name" formControlName="editFirstName" id="enterEditFistName"
+                 (ngModelChange)="enteredFirstNameFirst()">
+          <p *ngIf="employeePageService.form.controls['editFirstName']?.errors?.required && enteredFirstName" class="error">
+            Please enter first name
+          </p>
+          <p
+            *ngIf="employeePageService.form.controls['editFirstName']?.errors?.minLength && !employeePageService.form.controls['editFirstName']?.errors?.required && enteredFirstName"
+            class="error">
+            Must be longer than 4 characters
+          </p>
+          <p *ngIf="employeePageService.form.controls['editFirstName']?.errors?.maxLength && enteredFirstName" class="error">
+            Must be shorter than 51 characters
+          </p>
+        </div>
       </div>
 
-      <div class="input-data">
-        <i class="fas fa-signature"></i>
-        <input type="text" placeholder="Last name" formControlName="editLastName">
+      <div class="wrap-child">
+        <p class="title-param">Last name</p>
+        <div class="input-data" [class.input-data-error]="employeePageService.form.controls['editLastName'].errors && enteredLastName">
+          <i class="fas fa-signature"></i>
+          <input type="text" placeholder="Last name" formControlName="editLastName"
+                 (ngModelChange)="enteredLastNameFirst()">
+          <p *ngIf="employeePageService.form.controls['editLastName'].errors && enteredLastName" class="error">
+            Please enter last name
+          </p>
+        </div>
+      </div>
+
+      <div class="wrap-child">
+        <p class="title-param">Email</p>
+        <div class="input-data"
+             [class.input-data-error]="(employeePageService.form.controls['editEmail'].errors || existEmail) && enteredEmail">
+          <i class="far fa-envelope"></i>
+          <input type="text" placeholder="Email" formControlName="editEmail" (ngModelChange)="enteredEmailFirst()">
+          <p *ngIf="employeePageService.form.controls['editEmail']?.errors?.required && enteredEmail" class="error">
+            Please enter email
+          </p>
+          <p *ngIf="employeePageService.form.controls['editEmail']?.errors?.email && !employeePageService.form.controls['editEmail']?.errors?.required && enteredEmail"
+             class="error">
+            Email must be in the form ...@...
+          </p>
+          <p
+            *ngIf="existEmail && !employeePageService.form.controls['editEmail']?.errors?.email && !employeePageService.form.controls['editEmail']?.errors?.required && enteredEmail"
+            class="error">
+            Already exists
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="wrap">
+      <div class="wrap-child">
+        <p class="title-param title-param-2">Address</p>
+        <div class="input-data" [class.input-data-error]="employeePageService.form.controls['editAddress'].errors && enteredAddress">
+          <i class="fas fa-map-marker-alt"></i>
+          <input type="text" placeholder="Address" formControlName="editAddress" (ngModelChange)="enteredAddressFirst()">
+          <p *ngIf="employeePageService.form.controls['editAddress'].errors && enteredAddress" class="error">
+            Please enter address
+          </p>
+        </div>
+      </div>
+
+      <div class="wrap-child">
+        <p class="title-param title-param-2">City</p>
+        <div class="input-data" [class.input-data-error]="employeePageService.form.controls['editCity'].errors && enteredCity">
+          <i class="fas fa-city"></i>
+          <input type="text" placeholder="City" formControlName="editCity" (ngModelChange)="enteredCityFirst()">
+          <p *ngIf="employeePageService.form.controls['editCity'].errors && enteredCity" class="error">
+            Please enter city
+          </p>
+        </div>
+      </div>
+
+      <div class="wrap-child">
+        <p class="title-param title-param-2">Gender</p>
+        <div class="input-data">
+          <i class="fas fa-transgender-alt"></i>
+          <select formControlName="editGender">
+            <option *ngFor="let item of employeePageService.gender" [value]="item">{{item}}</option>
+          </select>
+        </div>
       </div>
     </div>
 
     <div class="wrap">
-      <div class="input-data">
-        <i class="far fa-envelope"></i>
-        <input type="text" placeholder="Email" formControlName="editEmail">
+      <div class="wrap-child">
+        <p class="title-param title-param-2">Date of birth</p>
+        <div class="input-data">
+          <i class="fas fa-birthday-cake"></i>
+          <input type="datetime-local" formControlName="editDoB"/>
+        </div>
       </div>
 
-      <div class="input-data">
-        <i class="fas fa-map-marker-alt"></i>
-        <input type="text" placeholder="Address" formControlName="editAddress">
-      </div>
-    </div>
-
-    <div class="wrap">
-      <div class="input-data">
-        <i class="fas fa-city"></i>
-        <input type="text" placeholder="City" formControlName="editCity">
-      </div>
-
-      <div class="input-data">
-        <i class="fas fa-transgender-alt"></i>
-        <select formControlName="editGender">
-          <option *ngFor="let item of employeePageService.gender" [value]="item">{{item}}</option>
-        </select>
+      <div class="wrap-child">
+        <p class="title-param title-param-2">Department</p>
+        <div class="input-data">
+          <i class="far fa-id-card"></i>
+          <select formControlName="editDepartmentId">
+            <option *ngFor="let item of ids"
+                    [value]="item.id+''">{{item.id + " - " + item.name + " - " + item.location}}</option>
+          </select>
+        </div>
       </div>
     </div>
 
     <div class="wrap">
-      <div class="input-data">
-        <i class="fas fa-birthday-cake"></i>
-        <input type="datetime-local" formControlName="editDoB"/>
-      </div>
-
-      <div class="input-data">
-        <i class="far fa-id-card"></i>
-        <select formControlName="editDepartmentId" style="padding-right: 115px;">
-          <option *ngFor="let item of ids" [value]="item">{{item}}</option>
-        </select>
-      </div>
-    </div>
-
-
-    <div class="wrap">
-      <div class="add" (click)="requestSaveEmployee()">
+      <div class="add" (click)="requestSaveEmployee()" [class.disable-button]="!employeePageService.form.valid || existEmail"
+           [matTooltip]="!(this.employeePageService.form.valid||existEmail)?'Missing data':''"
+           [matTooltipClass]="!(this.employeePageService.form.valid||existEmail)?'tooltip':''">
+        <i class="far fa-save"></i>
         <p>Save</p>
       </div>
-
       <div class="back" (click)="back()">
+        <i class="fas fa-angle-left"></i>
         <p>Back</p>
       </div>
     </div>
